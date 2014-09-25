@@ -1,0 +1,367 @@
+<list>
+  <codeTable>
+    <id>1</id>
+    <acronym>TEAM_CATEGORY_BOYS_OLDER</acronym>
+    <value>Starší chlapci.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>40</id>
+        <value>Az idősebb fiúk.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>42</id>
+        <value>Older boys.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>43</id>
+        <value>Starsi chłopcy.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>44</id>
+        <value>Starší chlapci.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>45</id>
+        <value>Stariji momci.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>46</id>
+        <value>Старшие мальчики.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>285</id>
+        <value>Starší kluci</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>2</id>
+    <acronym>TEAM_CATEGORY_BOYS_YOUNGER</acronym>
+    <value>Mladší chlapci.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>47</id>
+        <value>Младшие юноши.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>48</id>
+        <value>Mlađi momci .</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>49</id>
+        <value>Młodsi chłopcy.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>50</id>
+        <value>Mladší chlapci.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>51</id>
+        <value>Younger boys.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>52</id>
+        <value>Mladší kluci.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>53</id>
+        <value>A fiatalabb fiú.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>3</id>
+    <acronym>TEAM_CATEGORY_EMPLOYEES</acronym>
+    <value>Zamestnanci.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>55</id>
+        <value>Alkalmazottak.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>56</id>
+        <value>Pracowników.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>57</id>
+        <value>Zaměstnanci.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>58</id>
+        <value>Zaposleni.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>59</id>
+        <value>Sotrudniki.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>60</id>
+        <value>Employees.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>61</id>
+        <value>Zamestnanci.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>4</id>
+    <acronym>TEAM_CATEGORY_GIRLS_OLDER</acronym>
+    <value>Staršie dievčatá.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>62</id>
+        <value>Старые девушки.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>63</id>
+        <value>Starší dívky.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>64</id>
+        <value>Starije devojke .</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>65</id>
+        <value>Staršie dievčatá.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>66</id>
+        <value>Older girls.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>67</id>
+        <value>Az idősebb lányok.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>5</id>
+    <acronym>TEAM_CATEGORY_GIRLS_YOUNGER</acronym>
+    <value>Mladšie dievčatá.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>68</id>
+        <value>A fiatalabb lányok.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>69</id>
+        <value>Mlađi devojke.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>70</id>
+        <value>Mladší dívky.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>71</id>
+        <value>Mladšie dievčatá.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>72</id>
+        <value>Younger girls.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>73</id>
+        <value>Молодых девушек.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_TEAM_CATEGORIES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+</list>

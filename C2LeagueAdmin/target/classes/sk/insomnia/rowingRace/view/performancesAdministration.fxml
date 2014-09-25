@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?scenebuilder-preview-i18n-resource ../../../resources/bundles/ui.properties?>
+
+<AnchorPane prefHeight="692.0" prefWidth="979.0" xmlns:fx="http://javafx.com/fxml" fx:controller="sk.insomnia.rowingRace.controller.PerformancesAdministrationController">
+  <children>
+    <GridPane layoutX="14.0" layoutY="14.0" prefHeight="692.0" prefWidth="951.0">
+      <children>
+        <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <children>
+            <Label id="labelBigger" alignment="TOP_RIGHT" prefHeight="21.0" prefWidth="475.0" text="%label.raceCalendar.year" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label id="labelBigger" alignment="CENTER_RIGHT" prefWidth="475.0" text="%label.school.name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label id="labelBigger" alignment="CENTER_RIGHT" prefWidth="475.0" text="%label.team.name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <ComboBox id="cbPerformance" fx:id="cbYears" GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <ComboBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <ComboBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <Label id="labelBigger" alignment="CENTER_RIGHT" prefWidth="461.0" text="%label.interval.time" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+              <children>
+                <Label id="labelBigger" alignment="CENTER" prefWidth="79.0" text=":" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <Label id="labelBigger" alignment="CENTER" prefWidth="71.0" text=":" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                <TextField fx:id="tfPerformanceMinutes" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="tfPerformanceMinutes" prefWidth="200.0" promptText="tfPerformanceSeconds" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <TextField id="tfPerformanceMinutes" fx:id="tfPerformanceHundreths" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</AnchorPane>

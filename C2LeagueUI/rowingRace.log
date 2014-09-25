@@ -1,0 +1,68 @@
+12/15 09:10:21,830 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - initializing
+12/15 09:10:21,840 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - initializing form data
+12/15 09:10:30,048 INFO JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - java.nio.file.NoSuchFileException: school.xml
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:229)
+	at java.nio.file.Files.newByteChannel(Files.java:315)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:380)
+	at java.nio.file.Files.newInputStream(Files.java:106)
+	at java.nio.file.Files.newBufferedReader(Files.java:2666)
+	at sk.insomnia.tools.fileUtils.FileUtil.readFile(FileUtil.java:38)
+	at sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService.loadSchool(RowingRaceDataFileService.java:49)
+	at sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController.initializeSchoolData(RacersOverviewController.java:581)
+	at sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController.initializeFormData(RacersOverviewController.java:539)
+	at sk.insomnia.rowingRace.ui.RowingRaceGui.showRacersOverview(RowingRaceGui.java:159)
+	at sk.insomnia.rowingRace.ui.RowingRaceGui.start(RowingRaceGui.java:72)
+	at com.sun.javafx.application.LauncherImpl$5.run(LauncherImpl.java:319)
+	at com.sun.javafx.application.PlatformImpl$5.run(PlatformImpl.java:215)
+	at com.sun.javafx.application.PlatformImpl$4$1.run(PlatformImpl.java:179)
+	at com.sun.javafx.application.PlatformImpl$4$1.run(PlatformImpl.java:176)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl$4.run(PlatformImpl.java:176)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.access$100(WinApplication.java:29)
+	at com.sun.glass.ui.win.WinApplication$3$1.run(WinApplication.java:73)
+	at java.lang.Thread.run(Thread.java:722)
+
+12/15 09:10:30,048 INFO JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - going to load performances from file
+12/15 09:10:30,050 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService - reading of single performance from encrypted XML failed
+12/15 09:10:30,050 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService - reading of single performance from unencrypted XML failed
+12/15 09:10:30,050 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService - performances file doesn't exist yet
+12/15 09:10:30,050 INFO JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - Loading performance data from file failed, instantiating new 
+01/09 20:37:33,953 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - initializing
+01/09 20:37:33,986 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - initializing form data
+01/09 20:37:54,171 INFO JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - java.nio.file.NoSuchFileException: school.xml
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:229)
+	at java.nio.file.Files.newByteChannel(Files.java:315)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:380)
+	at java.nio.file.Files.newInputStream(Files.java:106)
+	at java.nio.file.Files.newBufferedReader(Files.java:2666)
+	at sk.insomnia.tools.fileUtils.FileUtil.readFile(FileUtil.java:38)
+	at sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService.loadSchool(RowingRaceDataFileService.java:49)
+	at sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController.initializeSchoolData(RacersOverviewController.java:581)
+	at sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController.initializeFormData(RacersOverviewController.java:539)
+	at sk.insomnia.rowingRace.ui.RowingRaceGui.showRacersOverview(RowingRaceGui.java:159)
+	at sk.insomnia.rowingRace.ui.RowingRaceGui.start(RowingRaceGui.java:72)
+	at com.sun.javafx.application.LauncherImpl$5.run(LauncherImpl.java:319)
+	at com.sun.javafx.application.PlatformImpl$5.run(PlatformImpl.java:215)
+	at com.sun.javafx.application.PlatformImpl$4$1.run(PlatformImpl.java:179)
+	at com.sun.javafx.application.PlatformImpl$4$1.run(PlatformImpl.java:176)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl$4.run(PlatformImpl.java:176)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.access$100(WinApplication.java:29)
+	at com.sun.glass.ui.win.WinApplication$3$1.run(WinApplication.java:73)
+	at java.lang.Thread.run(Thread.java:722)
+
+01/09 20:37:54,171 INFO JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - going to load performances from file
+01/09 20:37:54,174 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService - reading of single performance from encrypted XML failed
+01/09 20:37:54,174 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService - reading of single performance from unencrypted XML failed
+01/09 20:37:54,174 DEBUG JavaFX Application Thread class sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService - performances file doesn't exist yet
+01/09 20:37:54,175 INFO JavaFX Application Thread class sk.insomnia.rowingRace.racer.ui.controller.RacersOverviewController - Loading performance data from file failed, instantiating new 

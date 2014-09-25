@@ -1,0 +1,541 @@
+<list>
+  <codeTable>
+    <id>1</id>
+    <acronym>HU</acronym>
+    <value>Maďarčina.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>74</id>
+        <value>Vengerskiy .</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>75</id>
+        <value>Mađarski .</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>76</id>
+        <value>Maďarština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>77</id>
+        <value>Maďarčina.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>78</id>
+        <value>Węgierski.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>79</id>
+        <value>Hungarian.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>80</id>
+        <value>Magyar.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>2</id>
+    <acronym>CS</acronym>
+    <value>Čeština.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>81</id>
+        <value>Csehül.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>82</id>
+        <value>Czechy.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>83</id>
+        <value>Čeština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>84</id>
+        <value>Čeština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>85</id>
+        <value>Češka .</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>86</id>
+        <value>Чешский.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>87</id>
+        <value>Czech.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>3</id>
+    <acronym>EN</acronym>
+    <value>Angličtina.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>88</id>
+        <value>English.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>89</id>
+        <value>Angličtina.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>90</id>
+        <value>Английский.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>91</id>
+        <value>Engleski .</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>92</id>
+        <value>Angielski.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>93</id>
+        <value>Angličtina.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>94</id>
+        <value>Angol.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>4</id>
+    <acronym>PL</acronym>
+    <value>Polština.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>95</id>
+        <value>Lengyel.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>96</id>
+        <value>Polski.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>97</id>
+        <value>Polština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>98</id>
+        <value>Polština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>99</id>
+        <value>Польский.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>100</id>
+        <value>Poljski .</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>101</id>
+        <value>Polish.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>5</id>
+    <acronym>SK</acronym>
+    <value>Slovenčina.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>102</id>
+        <value>Slovak.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>103</id>
+        <value>Slovenčina.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>104</id>
+        <value>Словацкий.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>105</id>
+        <value>Slovački .</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>106</id>
+        <value>Słowacki.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>107</id>
+        <value>Szlovák.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>108</id>
+        <value>Slovenčina.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>6</id>
+    <acronym>SR</acronym>
+    <value>Srbština.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>109</id>
+        <value>Srbština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>110</id>
+        <value>Srbština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>111</id>
+        <value>Serbski.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>112</id>
+        <value>Szerb.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>113</id>
+        <value>Srpski.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>6</id>
+          <acronym>SR</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>114</id>
+        <value>Сербский.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>115</id>
+        <value>Serbian.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+  <codeTable>
+    <id>7</id>
+    <acronym>RU</acronym>
+    <value>Ruština.</value>
+    <languageMutations>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>116</id>
+        <value>Russian.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>3</id>
+          <acronym>EN</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>117</id>
+        <value>Ruština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>5</id>
+          <acronym>SK</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>118</id>
+        <value>Ruština.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>2</id>
+          <acronym>CS</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>119</id>
+        <value>Rosyjski.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>4</id>
+          <acronym>PL</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>120</id>
+        <value>Русский.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>7</id>
+          <acronym>RU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>121</id>
+        <value>Orosz.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+      <sk.insomnia.rowingRace.so.LanguageMutation>
+        <id>122</id>
+        <value>Ruski.</value>
+        <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
+          <id>1</id>
+          <acronym>HU</acronym>
+          <languageMutations/>
+        </language>
+        <codeTable>CT_LANGUAGES</codeTable>
+      </sk.insomnia.rowingRace.so.LanguageMutation>
+    </languageMutations>
+  </codeTable>
+</list>

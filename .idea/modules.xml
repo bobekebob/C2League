@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/C2League.iml" filepath="$PROJECT_DIR$/C2League.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C2LeagueAdmin/C2LeagueAdmin.iml" filepath="$PROJECT_DIR$/C2LeagueAdmin/C2LeagueAdmin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C2LeagueUI/C2LeagueUI.iml" filepath="$PROJECT_DIR$/C2LeagueUI/C2LeagueUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RowingRaceData/RowingRaceData.iml" filepath="$PROJECT_DIR$/RowingRaceData/RowingRaceData.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RowingRaceRemote/RowingRaceRemote.iml" filepath="$PROJECT_DIR$/RowingRaceRemote/RowingRaceRemote.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tools/tools.iml" filepath="$PROJECT_DIR$/tools/tools.iml" />
+    </modules>
+  </component>
+</project>
+

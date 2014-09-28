@@ -2,6 +2,7 @@ package sk.insomnia.rowingRace.dao.jdbc;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeoutException;
 
 import sk.insomnia.rowingRace.connection.DbConnection;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
@@ -25,16 +26,20 @@ public class TeamDaoImpl implements TeamDao {
 	public void saveOrUpdate(Team team,Long schoolID) throws SQLException {
         Connection connection = DbConnection.getConnection();
 		if (team.getId()!=null){			
-			PreparedStatement ps = connection.prepareStatement("UPDATE RR_TEAM SET NAME=?,CATEGORY_FK=? WHERE TEAM_ID=?");
+			PreparedStatement ps = connection.prepareStatement("UPDATE RR_TEAM SET NAME=?,CATEGORY_FK=?,MAX_RACERS=?,NUMBER_OF_ALTERNATES=? WHERE TEAM_ID=?");
 			ps.setString(1, team.getName());			
 			ps.setLong(2, team.getTeamCategory().getId());
-			ps.setLong(3, team.getId());
+            ps.setInt(3, team.getMaxRacers());
+            ps.setInt(4, team.getNumberOfAlternates());
+			ps.setLong(5, team.getId());
 			ps.executeUpdate();
 	        ps.close();
 		} else {
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO RR_TEAM (NAME,CATEGORY_FK) VALUES (?,?)",Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO RR_TEAM (NAME,CATEGORY_FK,MAX_RACERS,NUMBER_OF_ALTERNATES) VALUES (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, team.getName());
 			ps.setLong(2, team.getTeamCategory().getId());
+            ps.setInt(3, team.getMaxRacers());
+            ps.setInt(4, team.getNumberOfAlternates());
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
 	        if (rs.next()){
@@ -57,7 +62,7 @@ public class TeamDaoImpl implements TeamDao {
 	public Team findById(Long id) throws SQLException {
         Connection connection = DbConnection.getConnection();
 		Team team = null;
-		PreparedStatement ps = connection.prepareStatement("SELECT NAME,CATEGORY_FK FROM RR_TEAM WHERE TEAM_ID=?");
+		PreparedStatement ps = connection.prepareStatement("SELECT NAME,CATEGORY_FK,MAX_RACERS,NUMBER_OF_ALTERNATES FROM RR_TEAM WHERE TEAM_ID=?");
 		ps.setLong(1, id);
 		ResultSet rs = ps.executeQuery();
 		rs.beforeFirst();
@@ -65,6 +70,8 @@ public class TeamDaoImpl implements TeamDao {
 			team = new Team();
 			team.setId(id);
 			team.setName(rs.getString("NAME"));
+            team.setMaxRacers(rs.getInt("MAX_RACERS"));
+            team.setNumberOfAlternates(rs.getInt("NUMBER_OF_ALTERNATES"));
 			CodeTableDaoImpl tcdi = new CodeTableDaoImpl();
 			team.setTeamCategory(tcdi.findById(rs.getLong("CATEGORY_FK"),RowingRaceCodeTables.CT_TEAM_CATEGORIES));
 		}

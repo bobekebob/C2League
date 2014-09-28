@@ -39,9 +39,9 @@ import sk.insomnia.rowingRace.so.RowingRace;
 import sk.insomnia.rowingRace.so.Team;
 import sk.insomnia.rowingRace.timer.TimeDisplay;
 import sk.insomnia.tools.exceptionUtils.ExceptionUtils;
+import sk.insomnia.tools.timeUtil.RowingRaceTimeUtil;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,8 +96,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
     private int deviceCount = 0;
 
     private boolean raceRunning = false;
-    DecimalFormat df = new DecimalFormat("00");
-    DecimalFormat df2 = new DecimalFormat(".00");
+
     private int raceDistance;
     private int relaySplit;
     private boolean raceOnDistance = true;
@@ -207,18 +206,18 @@ public class RaceViewController extends AbstractController implements TeamsListe
     private void handleRaceTeamAction() {
         if (cbRaceTeam.getValue() == null) {
             String errorMessage = resourceBundle.getString("ERR_NO_TEAMS");
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("INFO_CORRECT_FIELDS"),
                     resourceBundle.getString("INFO_CORRECT_FIELDS_TITLE"));
         } else if (cbRaceTeam.getValue().getId() == null) {
             String errorMessage = resourceBundle.getString("ERR_TEAM_NOT_REGISTERED");
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("ERR_TEAM_NOT_REGISTERED_MSG"),
                     resourceBundle.getString("ERR_TEAM_NOT_REGISTERED"));
         } else if (cbRaceTeam.getValue().getRacers() == null
                 || cbRaceTeam.getValue().getRacers().size() <= 0) {
             String errorMessage = resourceBundle.getString("ERR_NO_RACERS_IN_ORGANIZATION");
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("INFO_CORRECT_FIELDS"),
                     resourceBundle.getString("INFO_CORRECT_FIELDS_TITLE"));
         } else if (
@@ -226,14 +225,9 @@ public class RaceViewController extends AbstractController implements TeamsListe
                         || cbRaceRaceRound.getValue().getDiscipline() == null
                         || cbRaceRaceRound.getValue().getDiscipline().getIntervals() == null) {
             String errorMessage = resourceBundle.getString("ERR_DISCIPLINE_INTERVALS_EMTPY");
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("INFO_CORRECT_FIELDS"),
                     resourceBundle.getString("INFO_CORRECT_FIELDS_TITLE"));
-        } else if (teamCompletedRound(cbRaceTeam.getValue())) {
-            String errorMessage = resourceBundle.getString("ERR_DISCIPLINE_ALREADY_TAKEN");
-            displayMessage(errorMessage,
-                    resourceBundle.getString("INFO_ACTION_NOT_ALLOWED"),
-                    resourceBundle.getString("INFO_ACTION_NOT_ALLOWED_TITLE"));
         } else {
             boolean performanceToSave = false;
 
@@ -248,7 +242,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
         if (this.cbRaceTeam.getValue().getRacers().size() < 4) {
             Object[] params = {RowingRaceCodeTables.CT_COUNTRIES};
             String errorMessage = MessageFormat.format(resourceBundle.getString("ERR_MINIMUM_TEAM_MEMBERS"), this.minRacersInRace) + "\n";
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("INFO_ACTION_NOT_ALLOWED"),
                     resourceBundle.getString("INFO_ACTION_NOT_ALLOWED_TITLE"));
             return;
@@ -276,39 +270,38 @@ public class RaceViewController extends AbstractController implements TeamsListe
         }
     }
 
-    /**
-     * This method returns true, if team already rowed this round.
-     *
-     * @param team
-     * @return
-     */
-    private boolean teamCompletedRound(Team team) {
-        return false;
-        /*
-        if (team.getPerformances()!=null){
-	    	for (Performance p:team.getPerformances()){
-	    		if (p.getRaceRound().getId() == cbRaceRaceRound.getValue().getId()){
-	    			return true;
-	    		}
-	    	}
-    	}
-    	return false;
-    	*/
-    }
-
     @FXML
     private void handleSavePerformance() {
-        try {
-            for (Performance p : performances.getPerformances()) {
+        if (performances == null || performances.getPerformances() == null){
+            return;
+        }
+        boolean saveSuccess = true;
+        for (Performance p : performances.getPerformances()) {
+            try {
                 dataProcessor.saveOrUpdatePerformance(p);
+                performances.getPerformances().remove(p);
+            } catch (RowingRaceException e) {
+                logger.debug("Error saving performance.", e);
+                String notSaved = this.resourceBundle.getString("INFO_PERFORMANCE_NOT_SAVED");
+                String[] args = {Integer.toString(performance.getFinalDistance()), RowingRaceTimeUtil.formatRowingTime(performance.getFinalTime())};
+                displayInfoMessage(MessageFormat.format(this.resourceBundle.getString("PERFORMANCE_DETAIL"), args), notSaved, notSaved);
+                saveSuccess = false;
             }
+        }
+        if (saveSuccess) {
             try {
                 fileService.deletePerformance();
             } catch (IOException e) {
                 logger.debug(ExceptionUtils.exceptionAsString(e));
             }
-        } catch (RowingRaceException e) {
-            logger.debug("Error saving performance.", e);
+            String saved = this.resourceBundle.getString("INFO_PERFORMANCE_SAVED_DB");
+            displayInfoMessage(saved, saved, saved);
+        } else {
+            try {
+                fileService.saveOrUpdate(performances);
+            } catch (IOException e) {
+                logger.error("Can't write performance data to file after attempt to store it in database.");
+            }
         }
     }
 
@@ -386,21 +379,16 @@ public class RaceViewController extends AbstractController implements TeamsListe
         public void handle(ActionEvent event) {
             if (deviceCount > 0) {
                 double speed = PMOperations.getSpeed(remote);
-                int sekundy = (int) (speed % 60);
-                int minuty = (int) (speed / 60);
-                String[] params = {df.format(minuty) + ":" + df.format(sekundy)};
-                lbRowingPaceTime.setText(MessageFormat.format(resourceBundle.getString("label.actualRowingTime"), params));
+                lbRowingPaceTime.setText(MessageFormat.format(resourceBundle.getString("label.actualRowingTime"), RowingRaceTimeUtil.rowingSpeedAsParams(speed)));
 
                 int cadence = PMOperations.getCadence(remote);
                 String[] props = {Integer.toString(cadence)};
                 rowingCadenceLabel.setText(MessageFormat.format(resourceBundle.getString("label.cadence"), props));
 
                 double seconds = PMOperations.getDataGetWorkTime(remote);
-                sekundy = (int) ((seconds / 100) % 60);
-                minuty = (int) ((seconds / 100) / 60);
-                df2.setMaximumIntegerDigits(0);
-                String[] rowingTimeParams = {df.format(minuty) + ":" + df.format(sekundy) + df2.format(seconds)};
-                lblRowingTime.setText(MessageFormat.format(resourceBundle.getString("label.rowingTime"), rowingTimeParams));
+                int sekundy = (int) ((seconds / 100) % 60);
+                int minuty = (int) ((seconds / 100) / 60);
+                lblRowingTime.setText(MessageFormat.format(resourceBundle.getString("label.rowingTime"), RowingRaceTimeUtil.rowingTimeAsParams(seconds)));
 
                 int newWorkState = PMOperations.getWorkoutState(remote);
                 if (newWorkState != workState) {
@@ -449,7 +437,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
                                 raceIntervalsTable.getSelectionModel().select(0);
                             }
                             raceIntervalsTable.getSelectionModel().getSelectedItem().setDistance(new Long(distance));
-                            raceIntervalsTable.getSelectionModel().getSelectedItem().setTime(df.format(minuty) + ":" + df.format(sekundy) + df2.format(seconds));
+                            raceIntervalsTable.getSelectionModel().getSelectedItem().setTime(RowingRaceTimeUtil.formatRowingTime(seconds));
                             // posun sa na dalsie
                             raceIntervalsTable.getSelectionModel().select(currSplit);
                             raceIntervalsTable.getColumns().get(2).setVisible(false);
@@ -483,6 +471,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
                     performanceWatcher.stop();
                     logger.debug("performance watcher is down");
                     btnSavePerformance.setDisable(false);
+/*
                     try {
                         logger.debug("connected, going to write data to DB");
                         dataProcessor.saveOrUpdatePerformance(performance);
@@ -490,6 +479,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
                     } catch (RowingRaceException e) {
                         logger.debug("Error saving performance data to database.", e);
                     }
+*/
                     if (performances.getPerformances() == null) {
                         performances.setPerformances(new ArrayList<Performance>());
                     }

@@ -8,8 +8,14 @@ import javafx.stage.Stage;
  */
 public abstract class AbstractMessageDisplayer {
 
-    public void displayMessage(String errorMessage, String windowTitle, String windowLabel) {
+    public void displayErrorMessage(String errorMessage, String windowTitle, String windowLabel) {
         Dialogs.showErrorDialog(new Stage(), errorMessage,
+                windowTitle,
+                windowLabel);
+    }
+
+    public void displayInfoMessage(String infoMessage, String windowTitle, String windowLabel) {
+        Dialogs.showInformationDialog(new Stage(), infoMessage,
                 windowTitle,
                 windowLabel);
     }

@@ -74,7 +74,7 @@ public class SchoolViewController extends AbstractController {
         try {
             DataChangeObserver.notifySchoolSelected(this.school);
         } catch (RowingRaceException e) {
-            displayMessage(resourceBundle.getString("ERR_RACE_LOAD"),
+            displayErrorMessage(resourceBundle.getString("ERR_RACE_LOAD"),
                     resourceBundle.getString("DATA_LOAD_TITLE"),
                     resourceBundle.getString("DATA_LOAD"));
         }
@@ -110,7 +110,7 @@ public class SchoolViewController extends AbstractController {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("INFO_CORRECT_FIELDS"),
                     resourceBundle.getString("INFO_CORRECT_FIELDS_TITLE"));
             return false;
@@ -133,7 +133,7 @@ public class SchoolViewController extends AbstractController {
                 } catch (RowingRaceException e) {
                     if (e.getExceptionType().equals(ExceptionType.SQL_EXCEPTION)) {
                         String errorMessage = resourceBundle.getString("ERR_SCHOOL_KEY_LOAD");
-                        displayMessage(errorMessage,
+                        displayErrorMessage(errorMessage,
                                 resourceBundle.getString("ERR_DATA_LOAD"),
                                 resourceBundle.getString("ERR_DATA_LOAD_TITLE"));
                     }
@@ -146,7 +146,7 @@ public class SchoolViewController extends AbstractController {
                 dataProcessor.saveSchoolInProcess(false);
             } catch (RowingRaceException e) {
                 String errorMessage = resourceBundle.getString("ERR_SAVE_SCHOOL");
-                displayMessage(errorMessage,
+                displayErrorMessage(errorMessage,
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("ERROR"));
                 logger.info(ExceptionUtils.exceptionAsString(e));
@@ -189,7 +189,7 @@ public class SchoolViewController extends AbstractController {
             } catch (Exception e) {
                 Object[] params = {RowingRaceCodeTables.CT_RACE_CATEGORY};
                 String errorMessage = MessageFormat.format(resourceBundle.getString("ERR_CODE_TABLE_DATA_LOAD"), params) + "\n";
-                displayMessage(errorMessage,
+                displayErrorMessage(errorMessage,
                         resourceBundle.getString("ERR_SAVE_SCHOOL"),
                         resourceBundle.getString("ERR_SAVE_SCHOOL"));
                 logger.error(ExceptionUtils.exceptionAsString(e));
@@ -203,7 +203,7 @@ public class SchoolViewController extends AbstractController {
                 this.school = this.fileService.loadSchool(null);
             } catch (Exception e) {
                 String errorMessage = resourceBundle.getString("ERR_SCHOOL_DATA_LOAD");
-                displayMessage(errorMessage,
+                displayErrorMessage(errorMessage,
                         resourceBundle.getString("ERR_DATA_LOAD"),
                         resourceBundle.getString("ERR_DATA_LOAD_TITLE"));
                 logger.debug(ExceptionUtils.exceptionAsString(e));
@@ -247,7 +247,7 @@ public class SchoolViewController extends AbstractController {
             } catch (Exception e) {
                 Object[] params = {RowingRaceCodeTables.CT_COUNTRIES};
                 String errorMessage = MessageFormat.format(resourceBundle.getString("ERR_CODE_TABLE_DATA_LOAD"), params) + "\n";
-                displayMessage(errorMessage,
+                displayErrorMessage(errorMessage,
                         resourceBundle.getString("ERR_DATA_LOAD"),
                         resourceBundle.getString("ERR_DATA_LOAD_TITLE"));
                 logger.info(ExceptionUtils.exceptionAsString(e));

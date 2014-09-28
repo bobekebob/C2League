@@ -75,7 +75,7 @@ public class LanguageController extends AbstractController  {
             }
         } catch (Exception e) {
             String errorMessage = resourceBundle.getString("ERR_LOADING_LANGUAGES");
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("ERR_DATA_LOAD"),
                     resourceBundle.getString("ERR_DATA_LOAD_TITLE"));
 
@@ -86,7 +86,7 @@ public class LanguageController extends AbstractController  {
                 languages = this.fileService.loadCodeTable(RowingRaceCodeTables.CT_LANGUAGES);
             } catch (IOException e) {
                 String errorMessage = resourceBundle.getString("ERR_LOADING_LANGUAGES");
-                displayMessage(errorMessage,
+                displayErrorMessage(errorMessage,
                         resourceBundle.getString("ERR_DATA_LOAD"),
                         resourceBundle.getString("ERR_DATA_LOAD_TITLE"));
 

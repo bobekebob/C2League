@@ -115,14 +115,14 @@ public class TeamEditDialogController extends AbstractController {
             } else {
                 Object[] params = {RowingRaceCodeTables.CT_TEAM_CATEGORIES};
                 String errorMessage = MessageFormat.format(resourceBundle.getString("ERR_NO_VALUES_SET"), params) + "\n";
-                displayMessage(errorMessage,
+                displayErrorMessage(errorMessage,
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("DATA_SAVE_TITLE"));
             }
         } catch (Exception e) {
             Object[] params = {RowingRaceCodeTables.CT_TEAM_CATEGORIES};
             String errorMessage = MessageFormat.format(resourceBundle.getString("ERR_CODE_TABLE_DATA_LOAD"), params) + "\n";
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("DATA_SAVE"),
                     resourceBundle.getString("DATA_SAVE_TITLE"));
         }

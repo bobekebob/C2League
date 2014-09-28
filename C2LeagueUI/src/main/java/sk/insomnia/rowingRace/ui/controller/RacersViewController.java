@@ -134,7 +134,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
                 this.dataProcessor.onTeamAdded(_team);
                 this.cbRacerTeam.getItems().add(_team);
             } catch (RowingRaceException e) {
-                displayMessage(resourceBundle.getString("ERROR_TEAM_SAVE"),
+                displayErrorMessage(resourceBundle.getString("ERROR_TEAM_SAVE"),
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("DATA_SAVE"));
             }
@@ -169,7 +169,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
         } catch (DtoUtils.DtoUtilException | IOException e) {
             logger.error("Can't load team data due to {}", e);
             //errorMessage, windowTitle, windowLabel
-            displayMessage(this.resourceBundle.getString("DATA_LOAD"), this.resourceBundle.getString("ERROR"), this.resourceBundle.getString("ERROR"));
+            displayErrorMessage(this.resourceBundle.getString("DATA_LOAD"), this.resourceBundle.getString("ERROR"), this.resourceBundle.getString("ERROR"));
             return false;
         }
     }
@@ -181,7 +181,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
                 this.dataProcessor.onTeamDeleted(cbRacerTeam.getValue());
                 cbRacerTeam.getItems().remove(cbRacerTeam.getValue());
             } catch (RowingRaceException e) {
-                displayMessage(resourceBundle.getString("ERROR_TEAM_DELETE"),
+                displayErrorMessage(resourceBundle.getString("ERROR_TEAM_DELETE"),
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("DATA_SAVE"));
 
@@ -218,7 +218,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
                 this.dataProcessor.onTeamChanged(team);
             } catch (RowingRaceException e) {
                 logger.error("Error while saving team data.", e);
-                displayMessage(resourceBundle.getString("ERROR_TEAM_SAVE"),
+                displayErrorMessage(resourceBundle.getString("ERROR_TEAM_SAVE"),
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("DATA_SAVE"));
             }
@@ -276,7 +276,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
             racer.setYearOfBirth(Integer.decode(tfRacerDob.getText()));
         } catch (Exception e) {
             logger.error("Invalid format of racer birth year.", e);
-            displayMessage(resourceBundle.getString("ERR_BAD_DATE_FORMAT"),
+            displayErrorMessage(resourceBundle.getString("ERR_BAD_DATE_FORMAT"),
                     resourceBundle.getString("ERR_BAD_DATE_FORMAT_TITLE"), resourceBundle.getString("ERROR"));
         }
     }
@@ -343,7 +343,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
                 logger.info(ExceptionUtils.exceptionAsString(e));
             }
             if (errorMessage != null) {
-                displayMessage(errorMessage,
+                displayErrorMessage(errorMessage,
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("DATA_SAVE_TITLE"));
             }
@@ -372,7 +372,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
                 logger.error("Error while deleting racer", e);
             }
             if (errorMessage != null) {
-                displayMessage(errorMessage,
+                displayErrorMessage(errorMessage,
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("DATA_SAVE_TITLE"));
             }
@@ -381,7 +381,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
             try {
                 this.dataProcessor.saveSchoolInProcess(true);
             } catch (RowingRaceException e) {
-                displayMessage(e.getMessage(),
+                displayErrorMessage(e.getMessage(),
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("DATA_SAVE_TITLE"));
             }
@@ -416,7 +416,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            displayMessage(errorMessage,
+            displayErrorMessage(errorMessage,
                     resourceBundle.getString("INFO_CORRECT_FIELDS"),
                     resourceBundle.getString("INFO_CORRECT_FIELDS_TITLE"));
             return false;

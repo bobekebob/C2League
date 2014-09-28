@@ -3,6 +3,7 @@ package sk.insomnia.rowingRace.data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
+import sk.insomnia.rowingRace.dataStore.CommonDataStore;
 import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
@@ -21,6 +22,7 @@ import sk.insomnia.rowingRace.so.School;
 import sk.insomnia.rowingRace.so.Team;
 import sk.insomnia.tools.exceptionUtils.ExceptionUtils;
 
+import javax.sql.CommonDataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -155,28 +157,28 @@ public final class DataProcessor implements SchoolListener {
     }
 
     public void loadRowingRace(List<EnumEntity> raceCategoryDaos) throws RowingRaceException {
-        RowingRace race = null;
         try {
-            race = dbService.loadRowingRace(raceCategoryDaos);
+            rowingRace = dbService.loadRowingRace(raceCategoryDaos);
         } catch (SQLException e) {
             throw new RowingRaceException(ExceptionType.SQL_EXCEPTION);
         } catch (ConnectivityException e) {
             throw new RowingRaceException(ExceptionType.CONNECTIVITY_EXCEPTION);
         }
-        if (race != null) {
+        if (rowingRace != null) {
             try {
-                fileService.saveRowingRace(race);
+                fileService.saveRowingRace(rowingRace);
             } catch (IOException e) {
                 throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.FILE_WRITE_EXCEPTION);
             }
         } else {
             try {
-                race = fileService.loadRowingRace();
+                rowingRace = fileService.loadRowingRace();
             } catch (IOException e) {
                 throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.FILE_READ_EXCEPTION);
             }
         }
-        DataChangeObserver.notifyRaceSelected(race);
+        DataChangeObserver.notifyRaceSelected(rowingRace);
+        CommonDataStore.registerInstance(RowingRace.class, rowingRace);
     }
 
     public void saveOrUpdatePerformance(Performance performance) throws RowingRaceException {

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?scenebuilder-stylesheet ../resources/css/rowingRace.css?>
-
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -15,7 +20,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-<AnchorPane id="dialogWindow" prefHeight="139.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sk.insomnia.rowingRace.ui.controller.TeamEditDialogController">
+
+<AnchorPane id="dialogWindow" prefHeight="139.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.insomnia.rowingRace.ui.controller.TeamEditDialogController">
   <!-- TODO Add Nodes -->
   <children>
     <GridPane prefHeight="400.0" prefWidth="640.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0">
@@ -45,7 +51,7 @@
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </GridPane.margin>
         </ComboBox>
-            <ComboBox fx:id="cbRowingRace" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ComboBox fx:id="cbRaceYear" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </GridPane.margin>

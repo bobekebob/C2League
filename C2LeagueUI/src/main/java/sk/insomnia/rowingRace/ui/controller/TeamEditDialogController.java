@@ -6,9 +6,12 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
+import sk.insomnia.rowingRace.dataStore.CommonDataStore;
+import sk.insomnia.rowingRace.dataStore.NoDataForKeyException;
 import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.RaceYearDto;
+import sk.insomnia.rowingRace.so.RowingRace;
 import sk.insomnia.rowingRace.so.Team;
 
 import java.text.MessageFormat;
@@ -59,6 +62,8 @@ public class TeamEditDialogController extends AbstractController {
         if (isInputValid()) {
             team.setName(tfTeamName.getText());
             team.setTeamCategory(cbTeamCategory.getValue());
+            team.setMaxRacers(cbRaceYear.getValue().getMaxRacers());
+            team.setNumberOfAlternates(cbRaceYear.getValue().getNumberOfAlternates());
             okClicked = true;
             dialogStage.close();
         }
@@ -78,6 +83,10 @@ public class TeamEditDialogController extends AbstractController {
 
         if (cbTeamCategory.getValue() == null) {
             errorMessage += resourceBundle.getString("ERR_TEAM_CATEGORY_EMPTY");
+        }
+
+        if (cbRaceYear.getValue() == null) {
+            errorMessage += resourceBundle.getString("ERR_RACE_YEAR_NOT_SELECTED");
         }
         if (errorMessage.length() == 0) {
             return true;
@@ -136,9 +145,15 @@ public class TeamEditDialogController extends AbstractController {
 
     private void setRaceYears() {
         this.cbRaceYear.getItems().clear();
-/*
-        List<RaceYearDto> raceYearDtos = DtoUtils.raceYearsToDtos(this.rowingRace.getRaceYears(), this.locale.getLanguage());
-        this.cbRaceYear.getItems().addAll(raceYearDtos);
-*/
+        try {
+            RowingRace rowingRace = (RowingRace) CommonDataStore.getInstanceOfClass(RowingRace.class);
+            if (rowingRace != null) {
+                List<RaceYearDto> raceYearDtos = DtoUtils.raceYearsToDtos(rowingRace.getRaceYears(), this.locale.getLanguage());
+                this.cbRaceYear.getItems().addAll(raceYearDtos);
+            }
+        } catch (NoDataForKeyException e) {
+            String msg = this.resourceBundle.getString("DATA_LOAD");
+            displayErrorMessage(this.resourceBundle.getString("ERR_RACE_LOAD"), msg, msg);
+        }
     }
 }

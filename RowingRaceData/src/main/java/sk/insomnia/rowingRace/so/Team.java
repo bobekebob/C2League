@@ -18,8 +18,26 @@ public class Team implements Serializable {
 	private List<Racer> racers;
 	private List<Performance> performances;
 	private EnumEntity teamCategory;
-	
-	public Team(){}
+    private Integer maxRacers;
+    private Integer numberOfAlternates;
+
+    public Integer getMaxRacers() {
+        return maxRacers;
+    }
+
+    public void setMaxRacers(Integer maxRacers) {
+        this.maxRacers = maxRacers;
+    }
+
+    public Integer getNumberOfAlternates() {
+        return numberOfAlternates;
+    }
+
+    public void setNumberOfAlternates(Integer numberOfAlternates) {
+        this.numberOfAlternates = numberOfAlternates;
+    }
+
+    public Team(){}
 	
 	public Team(String name){
 		this.name = name;

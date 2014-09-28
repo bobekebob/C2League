@@ -70,8 +70,6 @@ public class RacersViewController extends AbstractController implements TeamsLis
     @FXML
     private Button btnNewRacer;
 
-    private short maxRacersCount = 0;
-
     @FXML
     private void initialize() {
         logger.info("Initializing controller.");
@@ -202,7 +200,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
     private boolean racerCountReachedLimit() {
         if (cbRacerTeam.getValue() != null
                 && cbRacerTeam.getValue().getRacers() != null
-                && cbRacerTeam.getValue().getRacers().size() == maxRacersCount) {
+                && cbRacerTeam.getValue().getRacers().size() == (cbRacerTeam.getValue().getMaxRacers().intValue() + cbRacerTeam.getValue().getNumberOfAlternates().intValue())) {
             return true;
         } else {
             return false;

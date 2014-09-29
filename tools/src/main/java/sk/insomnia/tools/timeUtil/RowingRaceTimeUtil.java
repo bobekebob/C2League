@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
  */
 public class RowingRaceTimeUtil {
 
-    private static final DecimalFormat df2 = new DecimalFormat(".00");
+    private static final DecimalFormat df2 = new DecimalFormat("#.00");
     private static final DecimalFormat df = new DecimalFormat("00");
 
     public static String[] rowingSpeedAsParams(double speed){
@@ -19,6 +19,7 @@ public class RowingRaceTimeUtil {
     public static String[] rowingTimeAsParams(double millis){
         int sekundy = (int) ((millis / 100) % 60);
         int minuty = (int) ((millis / 100) / 60);
+        millis = millis%1;
         String[] rowingTimeParams = {df.format(minuty) + ":" + df.format(sekundy) + df2.format(millis)};
         return rowingTimeParams;
     }
@@ -26,6 +27,7 @@ public class RowingRaceTimeUtil {
     public static String formatRowingTime(double millis){
         int sekundy = (int) ((millis / 100) % 60);
         int minuty = (int) ((millis / 100) / 60);
+        millis = millis%1;
         return String.format("%s:%s%s",df.format(minuty),df.format(sekundy),df2.format(millis));
     }
 }

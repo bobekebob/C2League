@@ -149,7 +149,7 @@ public class SchoolViewController extends AbstractController {
                 displayErrorMessage(errorMessage,
                         resourceBundle.getString("DATA_SAVE"),
                         resourceBundle.getString("ERROR"));
-                logger.info(ExceptionUtils.exceptionAsString(e));
+                logger.info(e.getMessage());
             }
         }
 
@@ -178,7 +178,7 @@ public class SchoolViewController extends AbstractController {
                 this.fileService.saveOrUpdate(raceCategories, RowingRaceCodeTables.CT_RACE_CATEGORY);
             }
         } catch (Exception e) {
-            logger.error("Can't load data from DB ", e);
+            logger.error(String.format("Can't load data from DB, cause : %s ", e.getMessage()));
         } finally {
             try {
                 if (raceCategories == null) {
@@ -192,7 +192,7 @@ public class SchoolViewController extends AbstractController {
                 displayErrorMessage(errorMessage,
                         resourceBundle.getString("ERR_SAVE_SCHOOL"),
                         resourceBundle.getString("ERR_SAVE_SCHOOL"));
-                logger.error(ExceptionUtils.exceptionAsString(e));
+                logger.error(e.getMessage());
             }
         }
     }
@@ -206,7 +206,7 @@ public class SchoolViewController extends AbstractController {
                 displayErrorMessage(errorMessage,
                         resourceBundle.getString("ERR_DATA_LOAD"),
                         resourceBundle.getString("ERR_DATA_LOAD_TITLE"));
-                logger.debug(ExceptionUtils.exceptionAsString(e));
+                logger.debug(e.getMessage());
             }
         }
         if (school != null) {
@@ -233,7 +233,7 @@ public class SchoolViewController extends AbstractController {
         try {
             countries = dataProcessor.getCodeTable(RowingRaceCodeTables.CT_COUNTRIES);
         } catch (Exception e1) {
-            logger.error("Can't load countries data.", e1);
+            logger.debug("Can't load countries data from DB.", e1.getMessage());
         } finally {
             try {
                 if (countries != null) {
@@ -250,7 +250,7 @@ public class SchoolViewController extends AbstractController {
                 displayErrorMessage(errorMessage,
                         resourceBundle.getString("ERR_DATA_LOAD"),
                         resourceBundle.getString("ERR_DATA_LOAD_TITLE"));
-                logger.info(ExceptionUtils.exceptionAsString(e));
+                logger.debug(ExceptionUtils.exceptionAsString(e));
             }
         }
     }

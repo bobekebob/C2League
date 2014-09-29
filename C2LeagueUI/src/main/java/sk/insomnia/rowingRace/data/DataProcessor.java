@@ -22,7 +22,6 @@ import sk.insomnia.rowingRace.so.School;
 import sk.insomnia.rowingRace.so.Team;
 import sk.insomnia.tools.exceptionUtils.ExceptionUtils;
 
-import javax.sql.CommonDataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,10 +48,10 @@ public final class DataProcessor implements SchoolListener {
     public void onRacerAdded(Racer racer, Long teamId) throws RowingRaceException {
         try {
             dbService.addRacerToTeam(racer, teamId);
-        } catch (SQLException e) {
-            throw new RowingRaceException("Error while adding racer to team.", ExceptionType.SQL_EXCEPTION);
         } catch (ConnectivityException e) {
             throw new RowingRaceException("Error while adding racer to team.", ExceptionType.CONNECTIVITY_EXCEPTION);
+        } catch (Exception e) {
+            throw new RowingRaceException("Error while adding racer to team.", ExceptionType.SQL_EXCEPTION);
         }
         saveSchoolInProcess(true);
     }
@@ -60,10 +59,10 @@ public final class DataProcessor implements SchoolListener {
     public void onRacerDeleted(Racer racer) throws RowingRaceException {
         try {
             dbService.deleteRacer(racer);
-        } catch (SQLException e) {
-            throw new RowingRaceException("Error while deleting racer.", ExceptionType.SQL_EXCEPTION);
         } catch (ConnectivityException e) {
             throw new RowingRaceException("Error while adding racer to team.", ExceptionType.CONNECTIVITY_EXCEPTION);
+        } catch (Exception e) {
+            throw new RowingRaceException("Error while deleting racer.", ExceptionType.SQL_EXCEPTION);
         }
         saveSchoolInProcess(true);
     }
@@ -71,10 +70,10 @@ public final class DataProcessor implements SchoolListener {
     public void onRacerChanged(Racer racer) throws RowingRaceException {
         try {
             dbService.saveRacer(racer);
-        } catch (SQLException e) {
-            throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         } catch (ConnectivityException e) {
             throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.CONNECTIVITY_EXCEPTION);
+        } catch (Exception e) {
+            throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         }
         saveSchoolInProcess(true);
     }
@@ -82,10 +81,10 @@ public final class DataProcessor implements SchoolListener {
     public void onTeamChanged(Team team) throws RowingRaceException {
         try {
             dbService.saveTeam(team);
-        } catch (SQLException e) {
-            throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         } catch (ConnectivityException e) {
             throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.CONNECTIVITY_EXCEPTION);
+        } catch (Exception e) {
+            throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         }
         saveSchoolInProcess(true);
     }
@@ -96,10 +95,10 @@ public final class DataProcessor implements SchoolListener {
         }
         try {
             dbService.addTeamToSchool(team, school.getId());
-        } catch (SQLException e) {
-            throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         } catch (ConnectivityException e) {
             throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.CONNECTIVITY_EXCEPTION);
+        } catch (Exception e) {
+            throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         }
 
         if (school.getTeams() == null) {
@@ -112,10 +111,10 @@ public final class DataProcessor implements SchoolListener {
     public void onTeamDeleted(Team team) throws RowingRaceException {
         try {
             dbService.deleteTeam(team);
-        } catch (SQLException e) {
-            throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         } catch (ConnectivityException e) {
             throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.CONNECTIVITY_EXCEPTION);
+        } catch (Exception e) {
+            throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         }
         saveSchoolInProcess(true);
     }
@@ -138,56 +137,50 @@ public final class DataProcessor implements SchoolListener {
     public List<EnumEntityDto> getCodeTable(RowingRaceCodeTables rowingRaceCodeTables) throws RowingRaceException, DtoUtils.DtoUtilException {
         try {
             return DtoUtils.listOfLanguageSpecificValues(dbService.getCodeTableValues(rowingRaceCodeTables), this.locale.getLanguage());
-        } catch (SQLException e) {
-            throw new RowingRaceException(String.format("Can't read code table data. Cause : %s", ExceptionUtils.exceptionAsString(e)), ExceptionType.UNKNOWN);
-        } catch (ConnectivityException e) {
-            logger.trace(String.format("Connect to database is not open. Can't load codetable %s", rowingRaceCodeTables.getTableName()));
+        } catch (Exception e) {
+            throw new RowingRaceException(String.format("Can't read code table data. Cause : %s", e.getMessage()), ExceptionType.UNKNOWN);
         }
-        return null;
     }
 
     public String getSchoolCode() throws RowingRaceException {
         try {
             return dbService.getSchoolCode();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RowingRaceException(ExceptionType.SQL_EXCEPTION);
-        } catch (ConnectivityException e) {
-            throw new RowingRaceException(ExceptionType.CONNECTIVITY_EXCEPTION);
         }
     }
 
     public void loadRowingRace(List<EnumEntity> raceCategoryDaos) throws RowingRaceException {
         try {
             rowingRace = dbService.loadRowingRace(raceCategoryDaos);
-        } catch (SQLException e) {
-            throw new RowingRaceException(ExceptionType.SQL_EXCEPTION);
-        } catch (ConnectivityException e) {
-            throw new RowingRaceException(ExceptionType.CONNECTIVITY_EXCEPTION);
-        }
-        if (rowingRace != null) {
-            try {
-                fileService.saveRowingRace(rowingRace);
-            } catch (IOException e) {
-                throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.FILE_WRITE_EXCEPTION);
+        } catch (Exception e) {
+            logger.error(String.format("Can't load rowing race from DB, cause : %s", e.getMessage()));
+        } finally {
+            if (rowingRace != null) {
+                try {
+                    fileService.saveRowingRace(rowingRace);
+                } catch (IOException e) {
+                    throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.FILE_WRITE_EXCEPTION);
+                }
+            } else {
+                try {
+                    rowingRace = fileService.loadRowingRace();
+                } catch (IOException e) {
+                    throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.FILE_READ_EXCEPTION);
+                }
             }
-        } else {
-            try {
-                rowingRace = fileService.loadRowingRace();
-            } catch (IOException e) {
-                throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.FILE_READ_EXCEPTION);
-            }
+            DataChangeObserver.notifyRaceSelected(rowingRace);
+            CommonDataStore.registerInstance(RowingRace.class, rowingRace);
         }
-        DataChangeObserver.notifyRaceSelected(rowingRace);
-        CommonDataStore.registerInstance(RowingRace.class, rowingRace);
     }
 
     public void saveOrUpdatePerformance(Performance performance) throws RowingRaceException {
         try {
             dbService.saveOrUpdate(performance);
-        } catch (SQLException e) {
-            throw new RowingRaceException(ExceptionType.SQL_EXCEPTION);
         } catch (ConnectivityException e) {
             throw new RowingRaceException(ExceptionType.CONNECTIVITY_EXCEPTION);
+        } catch (Exception e) {
+            throw new RowingRaceException(ExceptionType.SQL_EXCEPTION);
         }
     }
 

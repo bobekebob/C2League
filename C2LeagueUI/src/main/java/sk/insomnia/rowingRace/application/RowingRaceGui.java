@@ -35,7 +35,7 @@ public class RowingRaceGui extends Application implements MainApplication {
             this.primaryStage = primaryStage;
             loadView(locale);
         } catch (Exception e) {
-            LOG.error(String.format("Error while loading application %s", e.getLocalizedMessage()));
+            LOG.debug(String.format("Error while loading application %s", e.getLocalizedMessage()));
         }
     }
 

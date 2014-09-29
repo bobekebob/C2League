@@ -1,10 +1,7 @@
 package sk.insomnia.rowingRace.ui.controller;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +14,6 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.insomnia.rowingRace.communication.PMOperations;
@@ -30,7 +26,6 @@ import sk.insomnia.rowingRace.listeners.RaceListener;
 import sk.insomnia.rowingRace.listeners.TeamsListener;
 import sk.insomnia.rowingRace.remote.PMDataHandler;
 import sk.insomnia.rowingRace.so.Performance;
-import sk.insomnia.rowingRace.so.PerformanceParameter;
 import sk.insomnia.rowingRace.so.Performances;
 import sk.insomnia.rowingRace.so.RaceRound;
 import sk.insomnia.rowingRace.so.Racer;
@@ -118,12 +113,14 @@ public class RaceViewController extends AbstractController implements TeamsListe
         cbRaceRaceRound.getItems().clear();
         cbRaceTeam.getItems().clear();
 
+/*
         try {
             this.connectivityWatcher.setCycleCount(Timeline.INDEFINITE);
             this.connectivityWatcher.play();
         } catch (Exception e) {
             this.connectivityWatcher.stop();
         }
+*/
 
 
     }
@@ -272,7 +269,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
 
     @FXML
     private void handleSavePerformance() {
-        if (performances == null || performances.getPerformances() == null){
+        if (performances == null || performances.getPerformances() == null) {
             return;
         }
         boolean saveSuccess = true;
@@ -332,7 +329,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
 
 
         if (raceRunning) {
-            this.performanceWatcher.stop();
+//            this.performanceWatcher.stop();
             this.workState = -1;
             this.remote.callResetCmd();
             this.remote.callGoReadyCmd();
@@ -350,12 +347,15 @@ public class RaceViewController extends AbstractController implements TeamsListe
             PMOperations.setWorkout(this.remote, cbRaceRaceRound.getValue().getDiscipline());
             // only while one rowing machine is supposed to be used
             this.remote.setPort(0);
+/*
             this.performanceWatcher.setCycleCount(Timeline.INDEFINITE);
             this.performanceWatcher.play();
+*/
         }
         refreshRaceIntervalsTable();
     }
 
+/*
     Timeline connectivityWatcher = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
 
         @Override
@@ -471,6 +471,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
                     performanceWatcher.stop();
                     logger.debug("performance watcher is down");
                     btnSavePerformance.setDisable(false);
+*/
 /*
                     try {
                         logger.debug("connected, going to write data to DB");
@@ -479,7 +480,8 @@ public class RaceViewController extends AbstractController implements TeamsListe
                     } catch (RowingRaceException e) {
                         logger.debug("Error saving performance data to database.", e);
                     }
-*/
+*//*
+
                     if (performances.getPerformances() == null) {
                         performances.setPerformances(new ArrayList<Performance>());
                     }
@@ -498,6 +500,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
             }
         }
     }));
+*/
 
     @Override
     public void onRaceSelected(RowingRace race) {

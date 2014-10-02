@@ -214,6 +214,9 @@ public class RacersViewController extends AbstractController implements TeamsLis
             showTeamEditDialog(team);
             try {
                 this.dataProcessor.onTeamChanged(team);
+                int originalPosition = cbRacerTeam.getSelectionModel().getSelectedIndex();
+                cbRacerTeam.getItems().remove(team);
+                cbRacerTeam.getItems().add(originalPosition, team);
             } catch (RowingRaceException e) {
                 logger.error("Error while saving team data.", e);
                 displayErrorMessage(resourceBundle.getString("ERROR_TEAM_SAVE"),
@@ -423,8 +426,7 @@ public class RacersViewController extends AbstractController implements TeamsLis
 
 
     @Override
-    public void onSchoolSelected(School school)
-    {
+    public void onSchoolSelected(School school) {
         enableTeamControls();
     }
 }

@@ -5,15 +5,19 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dataStore.CommonDataStore;
 import sk.insomnia.rowingRace.dataStore.NoDataForKeyException;
 import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.RaceYearDto;
+import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
 import sk.insomnia.rowingRace.so.RowingRace;
 import sk.insomnia.rowingRace.so.Team;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Locale;
@@ -21,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class TeamEditDialogController extends AbstractController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(TeamEditDialogController.class);
     @FXML
     private TextField tfTeamName;
     @FXML
@@ -38,7 +43,7 @@ public class TeamEditDialogController extends AbstractController {
         if (team != null) {
             if (team.getName() != null) tfTeamName.setText(team.getName());
             if (team.getTeamCategory() != null)
-                cbTeamCategory.setValue(DtoUtils.transformWithLanguageDependentValue(team.getTeamCategory(), locale.getLanguage(), EnumEntityDto.class));
+                cbTeamCategory.setValue(DtoUtils.transformWithLanguageDependentValue(team.getTeamCategory(), locale.getLanguage(), SimpleEnumEntityDto.class));
         } else {
             tfTeamName.setText("");
         }
@@ -115,22 +120,21 @@ public class TeamEditDialogController extends AbstractController {
             if (teamCategories != null) {
                 this.fileService.saveOrUpdate(teamCategories, RowingRaceCodeTables.CT_TEAM_CATEGORIES);
             }
-            if (teamCategories == null) {
-                teamCategories = this.fileService.loadCodeTable(RowingRaceCodeTables.CT_TEAM_CATEGORIES);
-            }
-
-            if (teamCategories != null) {
-                setupFormControls();
-            } else {
-                Object[] params = {RowingRaceCodeTables.CT_TEAM_CATEGORIES};
-                String errorMessage = MessageFormat.format(resourceBundle.getString("ERR_NO_VALUES_SET"), params) + "\n";
-                displayErrorMessage(errorMessage,
-                        resourceBundle.getString("DATA_SAVE"),
-                        resourceBundle.getString("DATA_SAVE_TITLE"));
-            }
         } catch (Exception e) {
+            LOG.info(String.format("Can't read data for %s from DB. Reason : %s", RowingRaceCodeTables.CT_TEAM_CATEGORIES, e.getMessage()));
+        }
+        if (teamCategories == null) {
+            try {
+                teamCategories = this.fileService.loadCodeTable(RowingRaceCodeTables.CT_TEAM_CATEGORIES);
+            } catch (IOException e) {
+                LOG.info(String.format("Can't read data for %s from file. Reason : %s", RowingRaceCodeTables.CT_TEAM_CATEGORIES, e.getMessage()));
+            }
+        }
+        if (teamCategories != null) {
+            setupFormControls();
+        } else {
             Object[] params = {RowingRaceCodeTables.CT_TEAM_CATEGORIES};
-            String errorMessage = MessageFormat.format(resourceBundle.getString("ERR_CODE_TABLE_DATA_LOAD"), params) + "\n";
+            String errorMessage = MessageFormat.format(resourceBundle.getString("ERR_NO_VALUES_SET"), params) + "\n";
             displayErrorMessage(errorMessage,
                     resourceBundle.getString("DATA_SAVE"),
                     resourceBundle.getString("DATA_SAVE_TITLE"));

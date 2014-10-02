@@ -116,6 +116,7 @@ public final class DataProcessor implements SchoolListener {
         } catch (Exception e) {
             throw new RowingRaceException(ExceptionUtils.exceptionAsString(e), ExceptionType.SQL_EXCEPTION);
         }
+        school.getTeams().remove(team);
         saveSchoolInProcess(true);
     }
 

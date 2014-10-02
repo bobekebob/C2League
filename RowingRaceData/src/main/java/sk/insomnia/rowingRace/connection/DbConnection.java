@@ -57,7 +57,7 @@ public class DbConnection {
             USED_CONNECTIONS.add(connection);
             return connection;
         }
-        throw new IllegalStateException("No more connections available!");
+        throw new SQLException("No more connections available!");
     }
 
     public static void releaseConnection(Connection connection){

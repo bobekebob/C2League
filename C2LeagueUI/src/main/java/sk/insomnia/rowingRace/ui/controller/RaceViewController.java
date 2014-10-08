@@ -44,7 +44,9 @@ import sk.insomnia.tools.timeUtil.RowingRaceTimeUtil;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -185,9 +187,13 @@ public class RaceViewController extends AbstractController implements TeamsListe
         if (cbRaceRaceYear.getValue() != null &&
                 cbRaceRaceYear.getValue().getRounds() != null) {
             List<RaceRound> rounds = new ArrayList<RaceRound>();
-            Date today = new Date();
+            Calendar today = GregorianCalendar.getInstance();
+            today.set(Calendar.HOUR, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+
             for (RaceRound rr : cbRaceRaceYear.getValue().getRounds()) {
-                if (rr.getBegin().getTime() <= today.getTime() && rr.getEnd().getTime() >= today.getTime()) {
+                if (rr.getBegin().getTime() <= today.getTime().getTime() && rr.getEnd().getTime() >= today.getTime().getTime()) {
                     rounds.add(rr);
                 }
             }

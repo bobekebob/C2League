@@ -3,6 +3,7 @@ package sk.insomnia.rowingRace.controller;
 import extfx.scene.control.CalendarView;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.insomnia.rowingRace.application.AdminGui;
@@ -64,9 +66,9 @@ public class RaceCalendarController extends AbstractController {
     @FXML
     private TableColumn<RaceRound, String> roundNumber;
     @FXML
-    private TableColumn<RaceRound, Date> roundBegin;
+    private TableColumn<RaceRound, String> roundBegin;
     @FXML
-    private TableColumn<RaceRound, Date> roundEnd;
+    private TableColumn<RaceRound, String> roundEnd;
     @FXML
     private TableColumn<RaceRound, String> roundDiscipline;
     @FXML
@@ -94,8 +96,24 @@ public class RaceCalendarController extends AbstractController {
     @FXML
     private void initialize() {
         roundNumber.setCellValueFactory(new PropertyValueFactory<RaceRound, String>("roundNumber"));
-        roundBegin.setCellValueFactory(new PropertyValueFactory<RaceRound, Date>("begin"));
-        roundEnd.setCellValueFactory(new PropertyValueFactory<RaceRound, Date>("end"));
+//        roundBegin.setCellValueFactory(new PropertyValueFactory<RaceRound, Date>("begin"));
+        roundBegin.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceRound, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<RaceRound, String> raceRoundStringCellDataFeatures) {
+                SimpleStringProperty simpleStringProperty = new SimpleStringProperty();
+                simpleStringProperty.setValue(DateConvertor.dateToString(raceRoundStringCellDataFeatures.getValue().getBegin()));
+                return simpleStringProperty;
+            }
+        });
+        roundEnd.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceRound, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<RaceRound, String> raceRoundStringCellDataFeatures) {
+                SimpleStringProperty simpleStringProperty = new SimpleStringProperty();
+                simpleStringProperty.setValue(DateConvertor.dateToString(raceRoundStringCellDataFeatures.getValue().getEnd()));
+                return simpleStringProperty;
+            }
+        });
+//        roundEnd.setCellValueFactory(new PropertyValueFactory<RaceRound, Date>("end"));
         roundDiscipline.setCellValueFactory(new PropertyValueFactory<RaceRound, String>("disciplineName"));
         raceRoundsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         raceRoundsTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RaceRound>() {

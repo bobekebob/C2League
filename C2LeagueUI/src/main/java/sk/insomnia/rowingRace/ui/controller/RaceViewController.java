@@ -188,9 +188,10 @@ public class RaceViewController extends AbstractController implements TeamsListe
                 cbRaceRaceYear.getValue().getRounds() != null) {
             List<RaceRound> rounds = new ArrayList<RaceRound>();
             Calendar today = GregorianCalendar.getInstance();
-            today.set(Calendar.HOUR, 0);
+            today.set(Calendar.HOUR_OF_DAY, 0);
             today.set(Calendar.MINUTE, 0);
             today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
 
             for (RaceRound rr : cbRaceRaceYear.getValue().getRounds()) {
                 if (rr.getBegin().getTime() <= today.getTime().getTime() && rr.getEnd().getTime() >= today.getTime().getTime()) {
@@ -330,6 +331,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
         } else {
             btnSavePerformance.setDisable(false);
         }
+        lblDeviceConnected.setText(resourceBundle.getString("label.pm.disconnected"));
     }
 
     @Override
@@ -374,6 +376,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
             try {
                 deviceCount = remote.connectToDevice();
             } catch (Exception e) {
+                logger.error("Can't connect to device, cause : ",e);
                 connectivityWatcher.stop();
             }
             if (deviceCount > 0) {

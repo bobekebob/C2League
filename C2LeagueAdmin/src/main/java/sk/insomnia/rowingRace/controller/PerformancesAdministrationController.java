@@ -6,17 +6,42 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
-import sk.insomnia.rowingRace.service.impl.RowingRaceDataDbService;
 import sk.insomnia.rowingRace.so.RaceYear;
 import sk.insomnia.rowingRace.so.RowingRace;
+
 
 public class PerformancesAdministrationController extends AbstractController {
 	private static final Logger logger = Logger.getLogger(PerformancesAdministrationController.class.toString());
 	private RowingRace rowingRace;
 	
-	@FXML ComboBox<RaceYear> cbYears;
-	
+	@FXML
+    ComboBox<RaceYear> cbRaceYear;
+
+    @FXML
+    ComboBox<RaceYear> cbRaceRound;
+
+    @FXML
+    TableView tbPerformances;
+    @FXML
+    TableColumn tcInstitutionName;
+    @FXML
+    TableColumn tcTeamName;
+    @FXML
+    TableColumn tcPerformanceTime;
+    @FXML
+    TableColumn tcPerformanceDate;
+    @FXML
+    TextField tfMinutes;
+    @FXML
+    TextField tfSeconds;
+    @FXML
+    TextField tfMillis;
+
+
 	public RowingRace getRowingRace() {
 		return rowingRace;
 	}

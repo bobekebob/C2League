@@ -7,8 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sk.insomnia.rowingRace.dto.RaceYearDto;
 import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
-import sk.insomnia.rowingRace.so.RaceYear;
+import sk.insomnia.rowingRace.so.RaceRound;
 import sk.insomnia.rowingRace.so.RowingRace;
 
 import java.util.Locale;
@@ -22,10 +23,10 @@ public class PerformancesAdministrationController extends AbstractController {
     private RowingRace rowingRace;
 
     @FXML
-    ComboBox<RaceYear> cbRaceYear;
+    ComboBox<RaceYearDto> cbRaceYear;
 
     @FXML
-    ComboBox<RaceYear> cbRaceRound;
+    ComboBox<RaceRound> cbRaceRound;
 
     @FXML
     TableView tbPerformances;
@@ -74,6 +75,18 @@ public class PerformancesAdministrationController extends AbstractController {
                     resourceBundle.getString("DATA_LOAD_TITLE"));
         }
     }
+
+    @FXML
+    private void handleCbRaceYearChange() {
+        this.cbRaceRound.getItems().clear();
+        this.cbRaceRound.getItems().addAll(cbRaceYear.getSelectionModel().getSelectedItem().getRounds());
+    }
+
+    @FXML
+    private void handleRaceRoundChange(){
+        RaceRound raceRound = cbRaceRound.getSelectionModel().getSelectedItem();
+        //TODO read all teams and add results to those which had rowed this round 
+   }
 
     @Override
     public void setDbService(RowingRaceDbFacade dbService) {

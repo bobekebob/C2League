@@ -28,7 +28,7 @@
                         <HBox alignment="CENTER_LEFT">
                            <children>
                               <Label alignment="CENTER_RIGHT" text="%label.raceCalendar.year" textAlignment="CENTER" />
-                              <ComboBox id="cbRaceYear" fx:id="cbRaceYear" prefWidth="150.0">
+                              <ComboBox id="cbRaceYear" fx:id="cbRaceYear" onAction="#handleCbRaceYearChange" prefWidth="150.0">
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
@@ -44,7 +44,7 @@
                         <HBox alignment="CENTER_LEFT" GridPane.rowIndex="1">
                            <children>
                               <Label alignment="CENTER_RIGHT" text="%label.raceCalendar.raceRound" GridPane.rowIndex="1" />
-                              <ComboBox id="cbRaceRound" fx:id="cbRaceRound" prefWidth="150.0" GridPane.rowIndex="1" />
+                              <ComboBox id="cbRaceRound" fx:id="cbRaceRound" onAction="#handleRaceRoundChange" prefWidth="150.0" GridPane.rowIndex="1" />
                            </children>
                         </HBox>
                         <TableView fx:id="tbPerformances" prefHeight="573.0" prefWidth="964.0" GridPane.rowIndex="2">

@@ -1,5 +1,7 @@
 package sk.insomnia.rowingRace.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.insomnia.rowingRace.connection.DbConnection;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dao.CodeTableDao;
@@ -22,6 +24,8 @@ import sk.insomnia.rowingRace.dao.jdbc.RacerDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.RowingRaceDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.SchoolDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.TeamDaoImpl;
+import sk.insomnia.rowingRace.dataStore.CommonDataStore;
+import sk.insomnia.rowingRace.dataStore.NoDataForKeyException;
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
@@ -31,7 +35,6 @@ import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
 import sk.insomnia.rowingRace.so.Discipline;
 import sk.insomnia.rowingRace.so.DisciplineCategory;
 import sk.insomnia.rowingRace.so.EnumEntity;
-import sk.insomnia.rowingRace.so.EnumEntitySO;
 import sk.insomnia.rowingRace.so.Interval;
 import sk.insomnia.rowingRace.so.LanguageMutation;
 import sk.insomnia.rowingRace.so.Performance;
@@ -58,6 +61,7 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     private static final SchoolDaoImpl schoolDao = new SchoolDaoImpl();
     private static final PerformanceDaoImpl performanceDao = new PerformanceDaoImpl();
     private static final CodeTableDaoImpl codeTableDao = new CodeTableDaoImpl();
+    private static final Logger LOG = LoggerFactory.getLogger(RowingRaceDataDbService.class);
 
 
     public RowingRaceDataDbService(Locale locale) {
@@ -79,11 +83,27 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
 
 
     public RowingRace loadRowingRace(List<EnumEntity> raceCategories) throws SQLException, ConnectivityException {
-        return rowingRaceDao.getRowingRace(raceCategories);
+        RowingRace rowingRace = null;
+        try {
+            rowingRace = (RowingRace) CommonDataStore.getInstanceOfClass(RowingRace.class);
+        } catch (NoDataForKeyException e) {
+            LOG.info("Race not found in data store, will read from DB.");
+            rowingRace = rowingRaceDao.getRowingRace(raceCategories);
+            CommonDataStore.registerInstance(RowingRace.class, rowingRace);
+        }
+        return rowingRace;
     }
 
     public RowingRace loadRowingRace() throws SQLException, ConnectivityException {
-        return rowingRaceDao.getRowingRace();
+        RowingRace rowingRace = null;
+        try {
+            rowingRace = (RowingRace) CommonDataStore.getInstanceOfClass(RowingRace.class);
+        } catch (NoDataForKeyException e) {
+            LOG.info("Race not found in data store, will read from DB.");
+            rowingRace = rowingRaceDao.getRowingRace();
+            CommonDataStore.registerInstance(RowingRace.class, rowingRace);
+        }
+        return rowingRace;
     }
 
 
@@ -162,7 +182,7 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     }
 
     @Override
-    public List<EnumEntity> loadValuesForCodeTable(EnumEntityDto value, RowingRaceCodeTables masterCodeTable,RowingRaceCodeTables slaveCodeTable) throws SQLException {
+    public List<EnumEntity> loadValuesForCodeTable(EnumEntityDto value, RowingRaceCodeTables masterCodeTable, RowingRaceCodeTables slaveCodeTable) throws SQLException {
         return codeTableDao.getSlaveValues(value, masterCodeTable, slaveCodeTable);
     }
 

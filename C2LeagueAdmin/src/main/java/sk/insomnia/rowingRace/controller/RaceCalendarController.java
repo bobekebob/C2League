@@ -31,7 +31,6 @@ import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dataStore.CommonDataStore;
 import sk.insomnia.rowingRace.dataStore.NoDataForKeyException;
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
-import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.RaceYearDto;
 import sk.insomnia.rowingRace.mapping.MappingUtil;
@@ -96,7 +95,6 @@ public class RaceCalendarController extends AbstractController {
     @FXML
     private void initialize() {
         roundNumber.setCellValueFactory(new PropertyValueFactory<RaceRound, String>("roundNumber"));
-//        roundBegin.setCellValueFactory(new PropertyValueFactory<RaceRound, Date>("begin"));
         roundBegin.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceRound, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<RaceRound, String> raceRoundStringCellDataFeatures) {
@@ -113,7 +111,6 @@ public class RaceCalendarController extends AbstractController {
                 return simpleStringProperty;
             }
         });
-//        roundEnd.setCellValueFactory(new PropertyValueFactory<RaceRound, Date>("end"));
         roundDiscipline.setCellValueFactory(new PropertyValueFactory<RaceRound, String>("disciplineName"));
         raceRoundsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         raceRoundsTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RaceRound>() {
@@ -150,8 +147,25 @@ public class RaceCalendarController extends AbstractController {
 
     @Override
     public void initializeFormData() {
-        cbRoundDisciplineCategory.getItems().clear();
+        prepareDisciplineCategoriesData();
         try {
+            ControllerUtils.prepareRaceData(cbRaceYear, rowingRace, this);
+        } catch (Exception e) {
+            Dialogs.showErrorDialog(new Stage(), e.getMessage(),
+                    resourceBundle.getString("DATA_LOAD"),
+                    resourceBundle.getString("DATA_LOAD_TITLE"));
+        }
+        refreshRaceRoundsTable();
+        try {
+            this.raceCategoriesList = (List<EnumEntityDto>) CommonDataStore.getValuesForClass(RaceCategory.class);
+        } catch (NoDataForKeyException e) {
+            logger.error("No data found for class {}", RaceCategory.class);
+        }
+    }
+
+    private void prepareDisciplineCategoriesData() {
+        try {
+            cbRoundDisciplineCategory.getItems().clear();
             List<DisciplineCategoryDto> disciplineCategories = (List<DisciplineCategoryDto>) CommonDataStore.getValuesForClass(DisciplineCategory.class);
             cbRoundDisciplineCategory.getItems().addAll(disciplineCategories);
         } catch (NoDataForKeyException e) {
@@ -160,15 +174,8 @@ public class RaceCalendarController extends AbstractController {
                     resourceBundle.getString("DATA_LOAD_TITLE"),
                     resourceBundle.getString("DATA_LOAD"));
         }
-
-        cbRaceYear.getItems().clear();
-        loadRowingRace();
-        try {
-            this.raceCategoriesList = (List<EnumEntityDto>) CommonDataStore.getValuesForClass(RaceCategory.class);
-        } catch (NoDataForKeyException e) {
-            logger.error("No data found for class {}", RaceCategory.class);
-        }
     }
+
 
     @Override
     public void setDbService(RowingRaceDbFacade dbService) {
@@ -425,12 +432,6 @@ public class RaceCalendarController extends AbstractController {
         }
     }
 
-    private void setRaceYears() {
-        this.cbRaceYear.getItems().clear();
-        List<RaceYearDto> raceYearDtos = DtoUtils.raceYearsToDtos(this.rowingRace.getRaceYears(), this.locale.getLanguage());
-        this.cbRaceYear.getItems().addAll(raceYearDtos);
-    }
-
 
     @FXML
     private void handleDeleteRaceYear() {
@@ -439,7 +440,7 @@ public class RaceCalendarController extends AbstractController {
             try {
                 this.dbService.deleteRaceYear(MappingUtil.toSO(cbRaceYear.getValue()));
                 removeFromRowingRace(this.cbRaceYear.getValue());
-                setRaceYears();
+                ControllerUtils.setRaceYears(this.cbRaceYear, this.rowingRace.getRaceYears(), this.locale);
             } catch (SQLException e) {
                 errorMessage = resourceBundle.getString("ERR_RACE_SAVE");
                 logger.error("SQL exception while deleting race year.", e);
@@ -492,27 +493,6 @@ public class RaceCalendarController extends AbstractController {
         return false;
     }
 
-    private void loadRowingRace() {
-        String errorMessage = "";
-        try {
-            this.rowingRace = this.dbService.loadRowingRace();
-            if (this.rowingRace != null && rowingRace.getRaceYears() != null) {
-                refreshRaceRoundsTable();
-                setRaceYears();
-            } else {
-                errorMessage = resourceBundle.getString("ERR_RACE_LOAD");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            errorMessage = resourceBundle.getString("ERR_RACE_LOAD");
-        }
-        if (!errorMessage.equals("")) {
-            Dialogs.showErrorDialog(new Stage(), errorMessage,
-                    resourceBundle.getString("DATA_LOAD"),
-                    resourceBundle.getString("DATA_LOAD_TITLE"));
-        }
-    }
 
     @FXML
     private void handleRaceYearChange() {

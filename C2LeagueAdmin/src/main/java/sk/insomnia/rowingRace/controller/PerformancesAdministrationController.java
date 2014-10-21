@@ -1,24 +1,27 @@
 package sk.insomnia.rowingRace.controller;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
 import sk.insomnia.rowingRace.so.RaceYear;
 import sk.insomnia.rowingRace.so.RowingRace;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.logging.Logger;
+
 
 public class PerformancesAdministrationController extends AbstractController {
-	private static final Logger logger = Logger.getLogger(PerformancesAdministrationController.class.toString());
-	private RowingRace rowingRace;
-	
-	@FXML
+
+    private static final Logger logger = Logger.getLogger(PerformancesAdministrationController.class.toString());
+    private RowingRace rowingRace;
+
+    @FXML
     ComboBox<RaceYear> cbRaceYear;
 
     @FXML
@@ -42,12 +45,13 @@ public class PerformancesAdministrationController extends AbstractController {
     TextField tfMillis;
 
 
-	public RowingRace getRowingRace() {
-		return rowingRace;
-	}
-	public void setRowingRace(RowingRace rowingRace) {
-		this.rowingRace = rowingRace;
-	}
+    public RowingRace getRowingRace() {
+        return rowingRace;
+    }
+
+    public void setRowingRace(RowingRace rowingRace) {
+        this.rowingRace = rowingRace;
+    }
 
 
     @Override
@@ -62,7 +66,13 @@ public class PerformancesAdministrationController extends AbstractController {
 
     @Override
     public void initializeFormData() {
-
+        try {
+            ControllerUtils.prepareRaceData(cbRaceYear, rowingRace, this);
+        } catch (Exception e) {
+            Dialogs.showErrorDialog(new Stage(), e.getMessage(),
+                    resourceBundle.getString("DATA_LOAD"),
+                    resourceBundle.getString("DATA_LOAD_TITLE"));
+        }
     }
 
     @Override

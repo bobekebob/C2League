@@ -10,4 +10,5 @@ public interface RaceRoundDao {
 
 	public void saveOrUpdate(RaceRound raceRound) throws SQLException,ConnectivityException;
 	public RaceRound getById(Long id) throws SQLException,ConnectivityException;
+    public void delete(RaceRound round) throws SQLException;
 }

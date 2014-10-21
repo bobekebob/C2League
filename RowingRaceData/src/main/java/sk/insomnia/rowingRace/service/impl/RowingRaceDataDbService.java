@@ -9,6 +9,7 @@ import sk.insomnia.rowingRace.dao.DisciplineCategoryDao;
 import sk.insomnia.rowingRace.dao.DisciplineDao;
 import sk.insomnia.rowingRace.dao.IntervalDao;
 import sk.insomnia.rowingRace.dao.LanguageMutationsDao;
+import sk.insomnia.rowingRace.dao.RaceRoundDao;
 import sk.insomnia.rowingRace.dao.RacerDao;
 import sk.insomnia.rowingRace.dao.RowingRaceDao;
 import sk.insomnia.rowingRace.dao.SchoolDao;
@@ -61,6 +62,15 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     private static final SchoolDaoImpl schoolDao = new SchoolDaoImpl();
     private static final PerformanceDaoImpl performanceDao = new PerformanceDaoImpl();
     private static final CodeTableDaoImpl codeTableDao = new CodeTableDaoImpl();
+    private static final DisciplineCategoryDao disciplineCategoryDao = new DisciplineCategoryDaoImpl();
+    private static final RaceRoundDao raceRoundDao = new RaceRoundDaoImpl();
+    private static final RacerDao racerDao = new RacerDaoImpl();
+    private static final TeamDao teamDao = new TeamDaoImpl();
+    private static final IntervalDao intervalDao = new IntervalDaoImpl();
+    private static final DisciplineDao disciplineDao = new DisciplineDaoImpl();
+
+
+
     private static final Logger LOG = LoggerFactory.getLogger(RowingRaceDataDbService.class);
 
 
@@ -69,15 +79,13 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     }
 
     public void saveSchool(School school) throws SQLException, ConnectivityException {
-        SchoolDaoImpl dao = new SchoolDaoImpl();
-        dao.saveSchool(school);
+        schoolDao.saveSchool(school);
     }
 
     public String getSchoolCode() throws SQLException, ConnectivityException {
         String retVal = null;
-        SchoolDaoImpl dao = new SchoolDaoImpl();
         DecimalFormat phoneDecimalFmt = new DecimalFormat("0000000000");
-        retVal = phoneDecimalFmt.format(dao.getSchoolCode());
+        retVal = phoneDecimalFmt.format(schoolDao.getSchoolCode());
         return retVal;
     }
 
@@ -150,20 +158,17 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
 
     public List<EnumEntity> getCodeTableValues(RowingRaceCodeTables codeTable) throws SQLException,
             ConnectivityException {
-        CodeTableDao tcDao = new CodeTableDaoImpl();
-        return tcDao.getAll(codeTable);
+        return codeTableDao.getAll(codeTable);
     }
 
     @Override
     public void deleteCodeTableValue(EnumEntity enumEntity, RowingRaceCodeTables codeTable) throws SQLException, ConnectivityException {
-        CodeTableDao codeTableDao = new CodeTableDaoImpl();
         codeTableDao.deleteCodeTableValue(enumEntity, codeTable);
     }
 
     @Override
     public void saveCodeTableValue(EnumEntity enumEntity, RowingRaceCodeTables codeTable) throws SQLException, ConnectivityException {
-        CodeTableDao ctDao = new CodeTableDaoImpl();
-        ctDao.saveOrUpdate(enumEntity, codeTable);
+        codeTableDao.saveOrUpdate(enumEntity, codeTable);
     }
 
     @Override
@@ -193,106 +198,88 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
 
     public List<DisciplineCategoryDto> loadDisciplineCategories()
             throws SQLException, ConnectivityException {
-        DisciplineCategoryDao dao = new DisciplineCategoryDaoImpl();
-        return MappingUtil.disciplineCategorieAsDtoList(dao.getAll());
+        return MappingUtil.disciplineCategorieAsDtoList(disciplineCategoryDao.getAll());
     }
 
     public void saveDisciplineCategory(DisciplineCategoryDto disciplineCategory) throws SQLException, ConnectivityException {
-        DisciplineCategoryDao dao = new DisciplineCategoryDaoImpl();
         DisciplineCategory disciplineCategorySO = new DisciplineCategory();
-
-        dao.saveOrUpdate(disciplineCategorySO);
+        disciplineCategoryDao.saveOrUpdate(disciplineCategorySO);
     }
 
     public void saveOrUpdateRaceYear(RaceYear raceYear) throws SQLException,
             ConnectivityException {
-        RowingRaceDao rowingRaceDao = new RowingRaceDaoImpl();
         rowingRaceDao.saveOrUpdate(raceYear);
     }
 
     public void deleteRaceYear(RaceYear year) throws SQLException,
             ConnectivityException {
-        RowingRaceDao rDao = new RowingRaceDaoImpl();
-        rDao.deleteRaceYear(year);
+        rowingRaceDao.deleteRaceYear(year);
     }
 
 
     public void deleteRowingRaceRound(RaceRound raceRound) throws SQLException,
             ConnectivityException {
-        RaceRoundDaoImpl dao = new RaceRoundDaoImpl();
-        dao.delete(raceRound);
+        raceRoundDao.delete(raceRound);
     }
 
     public void deleteRacer(Racer racer) throws SQLException,
             ConnectivityException {
-        RacerDao dao = new RacerDaoImpl();
-        dao.deleteRacer(racer);
+        racerDao.deleteRacer(racer);
     }
 
     public void deleteTeam(Team team) throws SQLException,
             ConnectivityException {
-        TeamDao dao = new TeamDaoImpl();
-        dao.delete(team);
+        teamDao.delete(team);
     }
 
     public void deleteSchool(School school) throws SQLException,
             ConnectivityException {
-        SchoolDao dao = new SchoolDaoImpl();
-        dao.delete(school);
+        schoolDao.delete(school);
     }
 
     public void addRowingRaceRound(RaceRound raceRound) throws SQLException,
             ConnectivityException {
-        RaceRoundDaoImpl dao = new RaceRoundDaoImpl();
-        dao.saveOrUpdate(raceRound);
+        raceRoundDao.saveOrUpdate(raceRound);
     }
 
     public void addTeamToSchool(Team team, Long schoolId) throws SQLException, ConnectivityException {
-        TeamDao dao = new TeamDaoImpl();
-        dao.saveOrUpdate(team, schoolId);
+        teamDao.saveOrUpdate(team, schoolId);
     }
 
     public void addRacerToTeam(Racer racer, Long teamId) throws SQLException,
             ConnectivityException {
-        RacerDao dao = new RacerDaoImpl();
-        dao.saveOrUpdate(racer, teamId);
+        racerDao.saveOrUpdate(racer, teamId);
     }
 
     public void saveTeam(Team team) throws SQLException, ConnectivityException {
-        TeamDao dao = new TeamDaoImpl();
-        dao.saveOrUpdate(team, null);
+        teamDao.saveOrUpdate(team, null);
     }
 
     public void addIntervalToDiscipline(Interval interval, Long disciplineId)
             throws SQLException, ConnectivityException {
-        IntervalDao dao = new IntervalDaoImpl();
-        dao.saveOrUpdate(interval, disciplineId);
+        intervalDao.saveOrUpdate(interval, disciplineId);
 
     }
 
     public void addDisciplineToCategory(Discipline discipline,
                                         Long disciplineCategoryId) throws SQLException,
             ConnectivityException {
-        DisciplineDao dao = new DisciplineDaoImpl();
-        dao.saveOrUpdate(discipline, disciplineCategoryId);
+        disciplineDao.saveOrUpdate(discipline, disciplineCategoryId);
     }
 
     public void saveInterval(Interval interval) throws SQLException,
             ConnectivityException {
-        IntervalDao dao = new IntervalDaoImpl();
-        dao.saveOrUpdate(interval, null);
+        intervalDao.saveOrUpdate(interval, null);
     }
 
     public void saveDiscipline(Discipline discipline) throws SQLException,
             ConnectivityException {
-        DisciplineDao dao = new DisciplineDaoImpl();
-        dao.saveOrUpdate(discipline, null);
+        disciplineDao.saveOrUpdate(discipline, null);
     }
 
     public void saveRacer(Racer racer) throws SQLException,
             ConnectivityException {
-        RacerDao dao = new RacerDaoImpl();
-        dao.saveOrUpdate(racer, null);
+        racerDao.saveOrUpdate(racer, null);
     }
 
 }

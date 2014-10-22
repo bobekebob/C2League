@@ -3,6 +3,7 @@ package sk.insomnia.rowingRace.service.facade;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
+import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.so.Discipline;
 import sk.insomnia.rowingRace.so.EnumEntity;
 import sk.insomnia.rowingRace.so.Interval;
@@ -72,6 +73,7 @@ public interface RowingRaceDbFacade {
     public boolean isConnectivity();
 
     public void saveOrUpdate(Performance performance) throws SQLException, ConnectivityException;
+    public List<PerformanceDto> getAllPerformancesForRaceYearAndRound(Long raceYearId, Long raceRoundId) throws SQLException;
 
     @Deprecated
     public List<EnumEntityDto> getCodeTable(RowingRaceCodeTables codeTable) throws SQLException, ConnectivityException;

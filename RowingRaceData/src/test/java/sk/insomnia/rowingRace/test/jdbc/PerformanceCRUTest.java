@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -14,6 +15,7 @@ import org.junit.Test;
 import sk.insomnia.rowingRace.dao.jdbc.PerformanceDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.RowingRaceDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.SchoolDaoImpl;
+import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.service.facade.ConnectivityException;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService;
 import sk.insomnia.rowingRace.so.Performance;
@@ -93,4 +95,13 @@ public class PerformanceCRUTest {
 		
 		
 	}
+
+    @Test
+    public void testReadPerformancesByYearAndRound() throws SQLException {
+        final Long raceYearId = new Long(6);
+        final Long roundId = new Long(64);
+        List<PerformanceDto> performanceDtoList = dao.getAllPerformancesForRaceYearAndRound(raceYearId, roundId);
+        assertNotNull(performanceDtoList);
+        assertTrue(performanceDtoList.size() > 0);
+    }
 }

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.insomnia.rowingRace.connection.DbConnection;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
-import sk.insomnia.rowingRace.dao.CodeTableDao;
 import sk.insomnia.rowingRace.dao.DisciplineCategoryDao;
 import sk.insomnia.rowingRace.dao.DisciplineDao;
 import sk.insomnia.rowingRace.dao.IntervalDao;
@@ -12,7 +11,6 @@ import sk.insomnia.rowingRace.dao.LanguageMutationsDao;
 import sk.insomnia.rowingRace.dao.RaceRoundDao;
 import sk.insomnia.rowingRace.dao.RacerDao;
 import sk.insomnia.rowingRace.dao.RowingRaceDao;
-import sk.insomnia.rowingRace.dao.SchoolDao;
 import sk.insomnia.rowingRace.dao.TeamDao;
 import sk.insomnia.rowingRace.dao.jdbc.CodeTableDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.DisciplineCategoryDaoImpl;
@@ -29,6 +27,7 @@ import sk.insomnia.rowingRace.dataStore.CommonDataStore;
 import sk.insomnia.rowingRace.dataStore.NoDataForKeyException;
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
+import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
 import sk.insomnia.rowingRace.mapping.MappingUtil;
 import sk.insomnia.rowingRace.service.facade.ConnectivityException;
@@ -68,7 +67,6 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     private static final TeamDao teamDao = new TeamDaoImpl();
     private static final IntervalDao intervalDao = new IntervalDaoImpl();
     private static final DisciplineDao disciplineDao = new DisciplineDaoImpl();
-
 
 
     private static final Logger LOG = LoggerFactory.getLogger(RowingRaceDataDbService.class);
@@ -134,6 +132,11 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     public void saveOrUpdate(Performance performance) throws SQLException,
             ConnectivityException {
         performanceDao.saveOrUpdate(performance);
+    }
+
+    @Override
+    public List<PerformanceDto> getAllPerformancesForRaceYearAndRound(Long raceYearId, Long raceRoundId) throws SQLException {
+        return this.performanceDao.getAllPerformancesForRaceYearAndRound(raceYearId, raceRoundId);
     }
 
 

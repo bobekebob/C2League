@@ -85,7 +85,7 @@ public class PerformancesAdministrationController extends AbstractController {
     @FXML
     private void handleRaceRoundChange(){
         RaceRound raceRound = cbRaceRound.getSelectionModel().getSelectedItem();
-        //TODO read all teams and add results to those which had rowed this round 
+        //TODO read all teams and add results to those which had rowed this round
    }
 
     @Override

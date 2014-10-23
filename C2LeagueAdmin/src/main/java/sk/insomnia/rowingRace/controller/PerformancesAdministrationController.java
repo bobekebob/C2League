@@ -1,25 +1,39 @@
 package sk.insomnia.rowingRace.controller;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.dto.RaceYearDto;
+import sk.insomnia.rowingRace.mapping.MappingUtil;
+import sk.insomnia.rowingRace.service.facade.ConnectivityException;
 import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
 import sk.insomnia.rowingRace.so.RaceRound;
 import sk.insomnia.rowingRace.so.RowingRace;
+import sk.insomnia.tools.dateUtils.DateConvertor;
+import sk.insomnia.tools.timeUtil.RowingRaceTimeUtil;
 
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
-
 
 public class PerformancesAdministrationController extends AbstractController {
 
-    private static final Logger logger = Logger.getLogger(PerformancesAdministrationController.class.toString());
+    private static final Logger LOG = LoggerFactory.getLogger(PerformancesAdministrationController.class);
     private RowingRace rowingRace;
 
     @FXML
@@ -29,9 +43,9 @@ public class PerformancesAdministrationController extends AbstractController {
     ComboBox<RaceRound> cbRaceRound;
 
     @FXML
-    TableView tbPerformances;
+    TableView<PerformanceDto> tbPerformances;
     @FXML
-    TableColumn tcInstitutionName;
+    TableColumn tcOrganizationName;
     @FXML
     TableColumn tcTeamName;
     @FXML
@@ -39,15 +53,81 @@ public class PerformancesAdministrationController extends AbstractController {
     @FXML
     TableColumn tcPerformanceDate;
     @FXML
+    TableColumn tcRowIndex;
+    @FXML
     TextField tfMinutes;
     @FXML
     TextField tfSeconds;
     @FXML
     TextField tfMillis;
 
+    private PerformanceDto selectedItem;
+
+    private ObservableList<PerformanceDto> performances = FXCollections.observableArrayList();
+
 
     public RowingRace getRowingRace() {
         return rowingRace;
+    }
+
+    @FXML
+    private void initialize() {
+        tbPerformances.setItems(performances);
+
+        tbPerformances.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PerformanceDto>() {
+
+            @Override
+            public void changed(ObservableValue<? extends PerformanceDto> observable,
+                                PerformanceDto oldValue, PerformanceDto newValue) {
+                showPerformanceDetails(newValue);
+            }
+        });
+
+        tcTeamName.setCellValueFactory(new PropertyValueFactory<PerformanceDto, String>("teamName"));
+        tcOrganizationName.setCellValueFactory(new PropertyValueFactory<PerformanceDto, String>("organizationName"));
+        tcRowIndex.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<PerformanceDto, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<PerformanceDto, String> performanceDtoStringCellDataFeatures) {
+                SimpleStringProperty retval = new SimpleStringProperty();
+                retval.setValue(String.valueOf(performances.indexOf(performanceDtoStringCellDataFeatures.getValue()) + 1));
+                return retval;
+            }
+        });
+        tcPerformanceTime.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<PerformanceDto, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<PerformanceDto, String> performanceDtoStringCellDataFeatures) {
+                SimpleStringProperty retval = new SimpleStringProperty();
+                if (performanceDtoStringCellDataFeatures.getValue().getFinalTime() != null) {
+                    retval.setValue(RowingRaceTimeUtil.formatRowingTime(performanceDtoStringCellDataFeatures.getValue().getFinalTime()));
+                }
+                return retval;
+            }
+        });
+        tcPerformanceDate.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<PerformanceDto, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<PerformanceDto, String> performanceDtoStringCellDataFeatures) {
+                SimpleStringProperty retval = new SimpleStringProperty();
+                if (performanceDtoStringCellDataFeatures.getValue().getCreatedOn() != null) {
+                    retval.setValue(DateConvertor.dateToString(performanceDtoStringCellDataFeatures.getValue().getCreatedOn()));
+                }
+                return retval;
+            }
+        });
+
+
+    }
+
+    private void showPerformanceDetails(PerformanceDto newValue) {
+        if (newValue == null) {
+            return;
+        }
+        if (newValue.getFinalTime() != null) {
+            String[] time = RowingRaceTimeUtil.rowingTimeAsParams(newValue.getFinalTime());
+            tfMinutes.setText(time[0]);
+            tfSeconds.setText(time[1]);
+            tfMillis.setText(time[2].replace(".", ""));
+        }
+        selectedItem = newValue;
     }
 
     public void setRowingRace(RowingRace rowingRace) {
@@ -83,10 +163,60 @@ public class PerformancesAdministrationController extends AbstractController {
     }
 
     @FXML
-    private void handleRaceRoundChange(){
+    private void handleRaceRoundChange() {
+        readPerformances();
+    }
+
+    private void readPerformances() {
+        RaceYearDto raceYear = cbRaceYear.getSelectionModel().getSelectedItem();
         RaceRound raceRound = cbRaceRound.getSelectionModel().getSelectedItem();
-        //TODO read all teams and add results to those which had rowed this round
-   }
+        try {
+            this.performances.clear();
+            this.performances.addAll(dbService.getAllPerformancesForRaceYearAndRound(raceYear.getId(), raceRound.getId()));
+        } catch (SQLException e) {
+            LOG.error(String.format("Can't read performance data for race year %s and race round %s.", raceYear.getYear(), raceRound.getDescription()), e);
+            displayErrorMessage(resourceBundle.getString("ERROR_LOAD_PERFORMANCES"));
+        }
+    }
+
+    @FXML
+    private void handleSavePerformance() {
+        if (isRecordValid()) {
+            selectedItem.setCreatedOn(new Date());
+            selectedItem.setFinalTime(RowingRaceTimeUtil.rowingTimeAsDouble(tfMinutes.getText(), tfSeconds.getText(), tfMillis.getText()));
+            try {
+                dbService.saveOrUpdate(MappingUtil.toSO(selectedItem));
+            } catch (ConnectivityException | SQLException e) {
+                LOG.error("Can't save performance.", e);
+                displayErrorMessage(resourceBundle.getString("ERROR_PERFORMANCE_SAVE"));
+            }
+            selectedItem = null;
+            readPerformances();
+        }
+    }
+
+    private void resetInputs(){
+        tfMinutes.setText("");
+        tfSeconds.setText("");
+        tfMillis.setText("");
+    }
+    private boolean isRecordValid() {
+        String errorMessage = "";
+        if (tfMinutes.getText().equals("")) {
+            errorMessage += resourceBundle.getString("MISSING_MINUTES");
+        }
+        if (tfSeconds.getText().equals("")) {
+            errorMessage += resourceBundle.getString("MISSING_SECONDS");
+        }
+        if (tfMillis.getText().equals("")) {
+            errorMessage += resourceBundle.getString("MISSING_MILLIS");
+        }
+        if (!errorMessage.equals("")) {
+            displayErrorMessage(errorMessage);
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public void setDbService(RowingRaceDbFacade dbService) {

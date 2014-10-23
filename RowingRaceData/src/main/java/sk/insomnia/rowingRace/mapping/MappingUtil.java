@@ -2,11 +2,16 @@ package sk.insomnia.rowingRace.mapping;
 
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
+import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.dto.RaceYearDto;
 import sk.insomnia.rowingRace.so.DisciplineCategory;
 import sk.insomnia.rowingRace.so.EnumEntity;
 import sk.insomnia.rowingRace.so.EnumEntitySO;
+import sk.insomnia.rowingRace.so.Performance;
+import sk.insomnia.rowingRace.so.PerformanceParameter;
+import sk.insomnia.rowingRace.so.RaceRound;
 import sk.insomnia.rowingRace.so.RaceYear;
+import sk.insomnia.rowingRace.so.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +23,24 @@ public final class MappingUtil {
 
     private MappingUtil() {
         throw new AssertionError("MappingUtil was not meant to be instantiated");
+    }
+
+    public static Performance toSO(PerformanceDto performanceDto) {
+        Performance performance = new Performance();
+        performance.setFinalTime(performanceDto.getFinalTime());
+        performance.setDate(performanceDto.getCreatedOn());
+        performance.setId(performanceDto.getPerformanceId());
+        if (performanceDto.getFinalDistance() != null) {
+            performance.setFinalDistance(performanceDto.getFinalDistance().intValue());
+        }
+        performance.setParameters(new ArrayList<PerformanceParameter>());
+        RaceRound rr = new RaceRound();
+        rr.setId(performanceDto.getRaceRoundId());
+        performance.setRaceRound(rr);
+        Team team = new Team();
+        team.setId(performanceDto.getTeamId());
+        performance.setTeam(team);
+        return performance;
     }
 
     public static DisciplineCategory toSO(DisciplineCategoryDto disciplineCategoryDto) {

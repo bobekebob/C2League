@@ -88,7 +88,7 @@ public class MasterSlaveCodeTableController extends AbstractController {
                     RowingRaceCodeTables.CT_TEAM_CATEGORIES);
         } catch (SQLException e) {
             LOG.error("Can't save slave values for key {} of codetable {}", masterValue.getId(), RowingRaceCodeTables.CT_RACE_CATEGORY, e);
-            errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD, this.resourceBundle);
+            errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD);
         }
     }
 
@@ -101,7 +101,7 @@ public class MasterSlaveCodeTableController extends AbstractController {
             selectedValues = DtoUtils.listOfLanguageSpecificValues(dbService.loadValuesForCodeTable(masterCodeTableValue, RowingRaceCodeTables.CT_RACE_CATEGORY, RowingRaceCodeTables.CT_TEAM_CATEGORIES), this.locale.getLanguage());
         } catch (DtoUtils.DtoUtilException | SQLException e) {
             LOG.error("Can't load slave values for code table {} with key {}", RowingRaceCodeTables.CT_RACE_CATEGORY, masterCodeTableValue.getId());
-            errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD, this.resourceBundle);
+            errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD);
         }
         selectValues(selectedValues);
         refreshTable(tbSlaveCodeTable);
@@ -126,14 +126,14 @@ public class MasterSlaveCodeTableController extends AbstractController {
             masterCodeTableValues.addAll(CommonDataStore.getValuesForClass(RaceCategory.class));
         } catch (NoDataForKeyException e) {
             LOG.debug("Can't read race category data from data store.");
-            errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD, this.resourceBundle);
+            errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD);
         }
 
         try {
             slaveCodeTableValues.addAll(CommonDataStore.getValuesForClass(TeamCategory.class));
         } catch (NoDataForKeyException e) {
             LOG.debug("Can't read race category data from data store.");
-            errorMessageBase(RowingRaceCodeTables.CT_TEAM_CATEGORIES, ERR_CODE_TABLE_DATA_LOAD, this.resourceBundle);
+            errorMessageBase(RowingRaceCodeTables.CT_TEAM_CATEGORIES, ERR_CODE_TABLE_DATA_LOAD);
         }
     }
 }

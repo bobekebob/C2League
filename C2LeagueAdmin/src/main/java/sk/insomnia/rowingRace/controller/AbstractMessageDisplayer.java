@@ -14,8 +14,9 @@ public abstract class AbstractMessageDisplayer {
 
     public static final String ERR_CODE_TABLE_DATA_SAVE = "ERR_CODE_TABLE_DATA_SAVE";
     public static final String ERR_CODE_TABLE_DATA_LOAD = "ERR_CODE_TABLE_DATA_LOAD";
+    public ResourceBundle resourceBundle;
 
-    public void errorMessageBase(RowingRaceCodeTables codeTable, String key, ResourceBundle resourceBundle) {
+    public void errorMessageBase(RowingRaceCodeTables codeTable, String key) {
         Object[] params = {codeTable};
         String errorMessage = MessageFormat.format(key, params) + "\n";
         displayMessage(errorMessage,
@@ -29,5 +30,10 @@ public abstract class AbstractMessageDisplayer {
                 windowLabel);
     }
 
+    public void displayErrorMessage(String errorMessage) {
+        Dialogs.showErrorDialog(new Stage(), errorMessage,
+                resourceBundle.getString("ERROR"),
+                resourceBundle.getString("ERROR"));
+    }
 
 }

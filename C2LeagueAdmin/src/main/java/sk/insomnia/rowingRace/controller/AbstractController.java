@@ -17,7 +17,6 @@ import java.util.TimerTask;
 public abstract class AbstractController extends AbstractMessageDisplayer {
 
     public Locale locale;
-    public ResourceBundle resourceBundle;
     public RowingRaceDbFacade dbService;
     public final RowingRaceDataFileService fileService = new RowingRaceDataFileService();
 

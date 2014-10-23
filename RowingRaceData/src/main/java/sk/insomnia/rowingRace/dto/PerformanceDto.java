@@ -15,6 +15,7 @@ public class PerformanceDto implements Serializable {
     private String teamName;
     private String organizationName;
     private Date createdOn;
+    private Long raceRoundId;
 
     public Long getTeamId() {
         return teamId;
@@ -70,5 +71,13 @@ public class PerformanceDto implements Serializable {
 
     public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public Long getRaceRoundId() {
+        return raceRoundId;
+    }
+
+    public void setRaceRoundId(Long raceRoundId) {
+        this.raceRoundId = raceRoundId;
     }
 }

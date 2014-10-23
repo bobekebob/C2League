@@ -213,7 +213,7 @@ public class CodeTablesController extends AbstractController {
 
     private boolean recordInProgressEmpty() {
         if (this.actualEnumEntitySO == null) {
-            errorMessageBase(selectedCodeTable, ERR_NO_RACE_CATEGORY_SELECTED, this.resourceBundle);
+            errorMessageBase(selectedCodeTable, ERR_NO_RACE_CATEGORY_SELECTED);
             return true;
         }
         return false;
@@ -227,7 +227,7 @@ public class CodeTablesController extends AbstractController {
         if (tfAcronym.getText() != null && !tfAcronym.getText().isEmpty()) {
             actualEnumEntitySO.setAcronym(tfAcronym.getText());
         } else {
-            errorMessageBase(selectedCodeTable, ERR_ACRONYM_EMTPY, this.resourceBundle);
+            errorMessageBase(selectedCodeTable, ERR_ACRONYM_EMTPY);
         }
         if (actualEnumEntitySO.getId() == null) {
             codeTableValues.add(actualEnumEntitySO);
@@ -299,7 +299,7 @@ public class CodeTablesController extends AbstractController {
     }
 
     private void displayErrorCTSAve() {
-        errorMessageBase(selectedCodeTable, ERR_CODE_TABLE_DATA_SAVE, this.resourceBundle);
+        errorMessageBase(selectedCodeTable, ERR_CODE_TABLE_DATA_SAVE);
     }
 
     private boolean mutationRecordValid() {
@@ -346,7 +346,7 @@ public class CodeTablesController extends AbstractController {
     }
 
     private void displayErrorCTLoad() {
-        errorMessageBase(selectedCodeTable, ERR_CODE_TABLE_DATA_LOAD, this.resourceBundle);
+        errorMessageBase(selectedCodeTable, ERR_CODE_TABLE_DATA_LOAD);
     }
 
 

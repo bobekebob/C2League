@@ -78,7 +78,11 @@ public class PerformanceDaoImpl implements PerformanceDao {
             logger.debug("going to save update performance");
             ps = connection.prepareStatement("INSERT INTO RR_PERFORMANCE (TEAM_FK,FINAL_DISTANCE, CREATED_ON, FINAL_TIME,RACE_ROUND_FK) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, performance.getTeam().getId());
-            ps.setLong(2, performance.getFinalDistance());
+            if (performance.getFinalDistance() != null) {
+                ps.setLong(2, performance.getFinalDistance());
+            } else {
+                ps.setLong(2, 0);
+            }
             ps.setDate(3, new java.sql.Date(performance.getDate().getTime()));
             ps.setDouble(4, performance.getFinalTime());
             ps.setLong(5, performance.getRaceRound().getId());
@@ -121,38 +125,47 @@ public class PerformanceDaoImpl implements PerformanceDao {
 
     @Override
     public List<PerformanceDto> getAllPerformancesForRaceYearAndRound(Long raceYearId, Long raceRoundId) throws SQLException {
-        String sql = "SELECT T.TEAM_ID, P.PERFORMANCE_ID, T.NAME AS TEAM_NAME, S.NAME AS ORGANIZATION_NAME, P.FINAL_DISTANCE, P.FINAL_TIME, P.CREATED_ON FROM RR_TEAM T"+
-        " JOIN RR_SCHOOL_TEAMS ST ON ST.TEAM_FK = T.TEAM_ID"+
-        " JOIN RR_SCHOOL S ON S.SCHOOL_ID = ST.SCHOOL_FK"+
-        " JOIN RR_SCHOOL_RACE_CATEGORIES SRC ON SRC.SCHOOL_FK = ST.SCHOOL_FK"+
-        " JOIN RR_RACE_CATEGORY RC ON RC.ID = SRC.CATEGORY_FK"+
-        " JOIN RR_RACE_YEAR RY ON RY.RACE_CATEGORY_FK = SRC.CATEGORY_FK"+
-        " LEFT JOIN RR_PERFORMANCE P ON P.TEAM_FK = T.TEAM_ID"+
-        " WHERE RY.ID = ? AND (P.RACE_ROUND_FK = ? OR P.RACE_ROUND_FK IS NULL)"+
-        " ORDER BY T.NAME, S.NAME";
+        String sql = "SELECT DISTINCT T.TEAM_ID,  T.NAME AS TEAM_NAME, S.NAME AS ORGANIZATION_NAME FROM RR_TEAM T" +
+                " JOIN RR_SCHOOL_TEAMS ST ON ST.TEAM_FK = T.TEAM_ID" +
+                " JOIN RR_SCHOOL S ON S.SCHOOL_ID = ST.SCHOOL_FK" +
+                " JOIN RR_SCHOOL_RACE_CATEGORIES SRC ON SRC.SCHOOL_FK = ST.SCHOOL_FK" +
+                " JOIN RR_RACE_CATEGORY RC ON RC.ID = SRC.CATEGORY_FK" +
+                " JOIN RR_RACE_YEAR RY ON RY.RACE_CATEGORY_FK = SRC.CATEGORY_FK" +
+                " WHERE RY.ID = ? AND T.DELETED = 0" +
+                " ORDER BY T.NAME, S.NAME";
+
+        String sql2 = "SELECT P.PERFORMANCE_ID, P.FINAL_DISTANCE, P.FINAL_TIME, P.CREATED_ON FROM RR_PERFORMANCE P WHERE P.RACE_ROUND_FK = ? AND P.TEAM_FK = ? ORDER BY FINAL_TIME ASC";
 
         List<PerformanceDto> performances = new ArrayList<>();
         final Connection connection = DbConnection.getConnection();
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setLong(1, raceYearId);
-        ps.setLong(2, raceRoundId);
         ResultSet rs = ps.executeQuery();
         rs.beforeFirst();
-        while (rs.next()){
+        while (rs.next()) {
             PerformanceDto performanceDto = new PerformanceDto();
-            performanceDto.setFinalDistance(rs.getDouble("FINAL_DISTANCE"));
-            performanceDto.setFinalTime(rs.getDouble("FINAL_TIME"));
             performanceDto.setTeamId(rs.getLong("TEAM_ID"));
-            performanceDto.setPerformanceId(rs.getLong("PERFORMANCE_ID"));
             performanceDto.setTeamName(rs.getString("TEAM_NAME"));
             performanceDto.setOrganizationName(rs.getString("ORGANIZATION_NAME"));
-            performanceDto.setCreatedOn(rs.getDate("CREATED_ON"));
+
+            PreparedStatement ps2 = connection.prepareCall(sql2);
+            ps2.setLong(1, raceRoundId);
+            ps2.setLong(2, performanceDto.getTeamId());
+            ResultSet resultSet = ps2.executeQuery();
+            resultSet.beforeFirst();
+            if (resultSet.next()) {
+                performanceDto.setFinalDistance(resultSet.getDouble("FINAL_DISTANCE"));
+                performanceDto.setFinalTime(resultSet.getDouble("FINAL_TIME"));
+                performanceDto.setPerformanceId(resultSet.getLong("PERFORMANCE_ID"));
+                performanceDto.setCreatedOn(resultSet.getDate("CREATED_ON"));
+            }
+            performanceDto.setRaceRoundId(raceRoundId);
             performances.add(performanceDto);
         }
         rs.close();
         ps.close();
         DbConnection.releaseConnection(connection);
         return performances;
-       }
+    }
 
 }

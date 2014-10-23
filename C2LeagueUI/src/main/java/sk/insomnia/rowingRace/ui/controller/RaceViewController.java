@@ -400,7 +400,7 @@ public class RaceViewController extends AbstractController implements TeamsListe
 
                 double seconds = PMOperations.getDataGetWorkTime(remote);
                 int sekundy = (int) ((seconds / 100) % 60);
-                lblRowingTime.setText(MessageFormat.format(resourceBundle.getString("label.rowingTime"), RowingRaceTimeUtil.rowingTimeAsParams(seconds)));
+                lblRowingTime.setText(MessageFormat.format(resourceBundle.getString("label.rowingTime"), RowingRaceTimeUtil.formatRowingTime(seconds)));
 
                 int newWorkState = PMOperations.getWorkoutState(remote);
                 if (newWorkState != workState) {

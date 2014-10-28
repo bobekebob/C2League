@@ -168,4 +168,14 @@ public class PerformanceDaoImpl implements PerformanceDao {
         return performances;
     }
 
+    @Override
+    public void deletePerformance(Long performanceId) throws SQLException, ConnectivityException {
+        final Connection connection = DbConnection.getConnection();
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM RR_PERFORMANCE WHERE PERFORMANCE_ID=?");
+        ps.setLong(1, performanceId);
+        ps.executeUpdate();
+        ps.close();
+        DbConnection.releaseConnection(connection);
+    }
+
 }

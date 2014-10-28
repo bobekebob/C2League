@@ -12,6 +12,7 @@ import sk.insomnia.rowingRace.exceptions.RowingRaceException;
 import sk.insomnia.rowingRace.listeners.DataChangeObserver;
 import sk.insomnia.rowingRace.listeners.SchoolListener;
 import sk.insomnia.rowingRace.service.facade.ConnectivityException;
+import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataDbService;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService;
 import sk.insomnia.rowingRace.so.EnumEntity;
@@ -35,12 +36,12 @@ public final class DataProcessor implements SchoolListener {
 
     private static final Logger logger = LoggerFactory.getLogger(DataProcessor.class);
     private static final RowingRaceDataFileService fileService = new RowingRaceDataFileService();
-    private final RowingRaceDataDbService dbService;
+    private final RowingRaceDbFacade dbService;
     private final Locale locale;
     private School school;
     private RowingRace rowingRace;
 
-    public DataProcessor(RowingRaceDataDbService dbService, Locale locale) {
+    public DataProcessor(RowingRaceDbFacade dbService, Locale locale) {
         this.dbService = dbService;
         this.locale = locale;
     }

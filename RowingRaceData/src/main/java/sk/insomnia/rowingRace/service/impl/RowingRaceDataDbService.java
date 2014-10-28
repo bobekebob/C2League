@@ -4,13 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.insomnia.rowingRace.connection.DbConnection;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
+import sk.insomnia.rowingRace.dao.CodeTableDao;
 import sk.insomnia.rowingRace.dao.DisciplineCategoryDao;
 import sk.insomnia.rowingRace.dao.DisciplineDao;
 import sk.insomnia.rowingRace.dao.IntervalDao;
 import sk.insomnia.rowingRace.dao.LanguageMutationsDao;
+import sk.insomnia.rowingRace.dao.PerformanceDao;
 import sk.insomnia.rowingRace.dao.RaceRoundDao;
 import sk.insomnia.rowingRace.dao.RacerDao;
 import sk.insomnia.rowingRace.dao.RowingRaceDao;
+import sk.insomnia.rowingRace.dao.SchoolDao;
 import sk.insomnia.rowingRace.dao.TeamDao;
 import sk.insomnia.rowingRace.dao.jdbc.CodeTableDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.DisciplineCategoryDaoImpl;
@@ -58,9 +61,9 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     private final ResourceBundle bundle;
     private static final LanguageMutationsDao languageMutationsDao = new LanguageMutationsDaoImpl();
     private static final RowingRaceDao rowingRaceDao = new RowingRaceDaoImpl();
-    private static final SchoolDaoImpl schoolDao = new SchoolDaoImpl();
-    private static final PerformanceDaoImpl performanceDao = new PerformanceDaoImpl();
-    private static final CodeTableDaoImpl codeTableDao = new CodeTableDaoImpl();
+    private static final SchoolDao schoolDao = new SchoolDaoImpl();
+    private static final PerformanceDao performanceDao = new PerformanceDaoImpl();
+    private static final CodeTableDao codeTableDao = new CodeTableDaoImpl();
     private static final DisciplineCategoryDao disciplineCategoryDao = new DisciplineCategoryDaoImpl();
     private static final RaceRoundDao raceRoundDao = new RaceRoundDaoImpl();
     private static final RacerDao racerDao = new RacerDaoImpl();
@@ -197,6 +200,11 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     @Override
     public void saveSlaveValues(Long masterValueId, RowingRaceCodeTables masterCodeTable, List<EnumEntityDto> slaveValues, RowingRaceCodeTables slaveCodeTable) throws SQLException {
         codeTableDao.saveSlaveValues(masterValueId, masterCodeTable, SimpleEnumEntityDto.toSoList(slaveValues), slaveCodeTable);
+    }
+
+    @Override
+    public void deletePerformance(PerformanceDto selectedItem) throws SQLException, ConnectivityException {
+        performanceDao.deletePerformance(selectedItem.getPerformanceId());
     }
 
     public List<DisciplineCategoryDto> loadDisciplineCategories()

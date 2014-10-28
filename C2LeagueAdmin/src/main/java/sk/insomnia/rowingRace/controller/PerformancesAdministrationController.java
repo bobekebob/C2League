@@ -195,11 +195,26 @@ public class PerformancesAdministrationController extends AbstractController {
         }
     }
 
-    private void resetInputs(){
+    @FXML
+    private void deletePerformance() {
+        if (tbPerformances.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+        try {
+            dbService.deletePerformance(tbPerformances.getSelectionModel().getSelectedItem());
+        } catch (ConnectivityException | SQLException e) {
+            LOG.info("Error deleting performance.", e);
+            displayErrorMessage(resourceBundle.getString("ERROR_PERFORMANCE_DELETE"));
+        }
+        readPerformances();
+    }
+
+    private void resetInputs() {
         tfMinutes.setText("");
         tfSeconds.setText("");
         tfMillis.setText("");
     }
+
     private boolean isRecordValid() {
         String errorMessage = "";
         if (tfMinutes.getText().equals("")) {
@@ -217,6 +232,7 @@ public class PerformancesAdministrationController extends AbstractController {
         }
         return true;
     }
+
 
     @Override
     public void setDbService(RowingRaceDbFacade dbService) {

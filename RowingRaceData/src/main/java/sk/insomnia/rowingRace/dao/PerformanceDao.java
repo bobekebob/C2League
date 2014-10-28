@@ -11,4 +11,5 @@ public interface PerformanceDao {
 
 	public void saveOrUpdate(Performance performance)  throws SQLException,ConnectivityException;
     public List<PerformanceDto> getAllPerformancesForRaceYearAndRound(Long raceYearId, Long raceRoundId) throws SQLException;
+    public void deletePerformance(Long performanceId)  throws SQLException,ConnectivityException;
 }

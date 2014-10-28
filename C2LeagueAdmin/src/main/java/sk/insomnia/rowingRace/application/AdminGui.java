@@ -21,6 +21,7 @@ import sk.insomnia.rowingRace.controller.LanguageController;
 import sk.insomnia.rowingRace.controller.RootLayoutController;
 import sk.insomnia.rowingRace.controller.TeamEditDialogController;
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
+import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataDbService;
 import sk.insomnia.rowingRace.so.Discipline;
 import sk.insomnia.rowingRace.so.EnumEntity;
@@ -121,7 +122,7 @@ public class AdminGui extends Application {
 
     public void showRacersOverview() {
         try {
-            RowingRaceDataDbService dbService = new RowingRaceDataDbService(locale);
+            RowingRaceDbFacade dbService = new RowingRaceDataDbService(locale);
 
             FXMLLoader loader = new FXMLLoader(AdminGui.class.getResource("/sk/insomnia/rowingRace/view/admin.fxml"), this.rb);
             AnchorPane overviewPage = (AnchorPane) loader.load();

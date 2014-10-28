@@ -93,4 +93,6 @@ public interface RowingRaceDbFacade {
     public List<EnumEntity> loadValuesForCodeTable(EnumEntityDto value, RowingRaceCodeTables masterCodeTable, RowingRaceCodeTables slaveCodeTable) throws SQLException;
 
     public void saveSlaveValues(Long masterValueId, RowingRaceCodeTables masterCodeTable, List<EnumEntityDto> slaveValues, RowingRaceCodeTables slaveCodeTable) throws SQLException;
+
+    public void deletePerformance(PerformanceDto selectedItem) throws SQLException, ConnectivityException;
 }

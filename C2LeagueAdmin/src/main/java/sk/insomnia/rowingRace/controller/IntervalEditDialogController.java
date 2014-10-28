@@ -13,6 +13,7 @@ import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
+import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataDbService;
 import sk.insomnia.rowingRace.so.Interval;
 
@@ -40,7 +41,7 @@ public class IntervalEditDialogController {
     private ObservableList<EnumEntityDto> intervalDimensionsData = FXCollections.observableArrayList();
     private ResourceBundle rb;
 
-    private RowingRaceDataDbService dbService;
+    private RowingRaceDbFacade dbService;
 
     private Locale locale;
 

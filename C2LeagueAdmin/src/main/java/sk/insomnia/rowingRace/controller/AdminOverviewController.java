@@ -15,6 +15,7 @@ import sk.insomnia.rowingRace.service.facade.ConnectivityException;
 import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -33,12 +34,16 @@ public class AdminOverviewController extends AbstractController {
     private RaceCalendarController raceCalendarController;
     @FXML
     private MasterSlaveCodeTableController masterSlaveCodeTableController;
+    @FXML
+    private OrganizationAdministrationController organizationAdministrationController;
 
+    private static final List<AbstractController> registeredControllers = new ArrayList<>();
 
     private AdminGui rowingRaceGui;
 
 
     public AdminOverviewController() {
+
     }
 
 
@@ -47,39 +52,34 @@ public class AdminOverviewController extends AbstractController {
 
     @FXML
     private void initialize() {
+        this.registeredControllers.add(performancesAdministrationController);
+        this.registeredControllers.add(codeTablesController);
+        this.registeredControllers.add(disciplinesController);
+        this.registeredControllers.add(raceCalendarController);
+        this.registeredControllers.add(masterSlaveCodeTableController);
+        this.registeredControllers.add(organizationAdministrationController);
     }
 
 
     @Override
     public void initLocale(Locale locale) {
         this.locale = locale;
-        this.codeTablesController.initLocale(locale);
-        this.performancesAdministrationController.initLocale(locale);
-        this.raceCalendarController.initLocale(locale);
-        this.disciplinesController.initLocale(locale);
-        this.masterSlaveCodeTableController.initLocale(locale);
     }
 
     @Override
     public void initResourceBundle(ResourceBundle resourceBundle) {
         this.resourceBundle = resourceBundle;
-        this.codeTablesController.initResourceBundle(resourceBundle);
-        this.performancesAdministrationController.initResourceBundle(resourceBundle);
-        this.raceCalendarController.initResourceBundle(resourceBundle);
-        this.disciplinesController.initResourceBundle(resourceBundle);
-        this.masterSlaveCodeTableController.initResourceBundle(resourceBundle);
     }
 
     public void initializeFormData() {
         //TODO : initialize CommonDataStore here
-
         initializeDataStore();
-
-        this.codeTablesController.initializeFormData();
-        this.performancesAdministrationController.initializeFormData();
-        this.disciplinesController.initializeFormData();
-        this.raceCalendarController.initializeFormData();
-        this.masterSlaveCodeTableController.initializeFormData();
+        for (AbstractController controller:registeredControllers){
+            controller.initLocale(locale);
+            controller.initResourceBundle(resourceBundle);
+            controller.setDbService(dbService);
+            controller.initializeFormData();
+        }
     }
 
     private void initializeDataStore() {
@@ -114,11 +114,6 @@ public class AdminOverviewController extends AbstractController {
     @Override
     public void setDbService(RowingRaceDbFacade dbService) {
         this.dbService = dbService;
-        this.codeTablesController.setDbService(dbService);
-        this.raceCalendarController.setDbService(dbService);
-        this.disciplinesController.setDbService(dbService);
-        this.performancesAdministrationController.setDbService(dbService);
-        this.masterSlaveCodeTableController.setDbService(dbService);
     }
 
     public void setRowingRaceGui(AdminGui rowingRaceGui) {

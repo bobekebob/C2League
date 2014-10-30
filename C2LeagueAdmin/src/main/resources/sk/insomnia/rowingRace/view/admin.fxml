@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="692.0" prefWidth="979.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sk.insomnia.rowingRace.controller.AdminOverviewController">
+<AnchorPane prefHeight="692.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.insomnia.rowingRace.controller.AdminOverviewController">
   <children>
     <TabPane id="MainTabs" fx:id="tabPane" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <tabs>
@@ -37,7 +37,7 @@
             <fx:include fx:id="performancesAdministration" source="performancesAdministration.fxml" />
           </content>
         </Tab>
-            <Tab text="%label.school">
+            <Tab text="%label.tab.institution">
                 <content>
                     <fx:include fx:id="organizationAdministration" source="organizationView.fxml" />
                 </content>

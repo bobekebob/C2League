@@ -4,6 +4,7 @@ import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.PerformanceDto;
+import sk.insomnia.rowingRace.dto.TeamDto;
 import sk.insomnia.rowingRace.so.Discipline;
 import sk.insomnia.rowingRace.so.EnumEntity;
 import sk.insomnia.rowingRace.so.Interval;
@@ -28,6 +29,10 @@ public interface RowingRaceDbFacade {
     public School findById(Long id) throws SQLException, ConnectivityException;
 
     public String getSchoolCode() throws SQLException, ConnectivityException;
+
+    public List<School> getSchools() throws SQLException, ConnectivityException;
+
+    public List<TeamDto> getTeamsBySchoolId(Long schoolId) throws SQLException, ConnectivityException;
 
     public void addTeamToSchool(Team team, Long schoolId) throws SQLException, ConnectivityException;
 

@@ -12,11 +12,13 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import sk.insomnia.rowingRace.dao.PerformanceDao;
 import sk.insomnia.rowingRace.dao.jdbc.PerformanceDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.RowingRaceDaoImpl;
 import sk.insomnia.rowingRace.dao.jdbc.SchoolDaoImpl;
 import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.service.facade.ConnectivityException;
+import sk.insomnia.rowingRace.service.facade.RowingRaceFileFacade;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService;
 import sk.insomnia.rowingRace.so.Performance;
 import sk.insomnia.rowingRace.so.PerformanceParameter;
@@ -26,13 +28,13 @@ import sk.insomnia.rowingRace.so.School;
 
 public class PerformanceCRUTest {
 
-	RowingRaceDataFileService fileService;
-	PerformanceDaoImpl dao;
+    RowingRaceFileFacade fileService;
+	PerformanceDao dao;
 	
 	@Before
 	public void setFileService(){
 		fileService = new RowingRaceDataFileService();
-		dao = new PerformanceDaoImpl();
+		dao = PerformanceDaoImpl.getInstance();
 	}
 	public int fibonachi(int i){
 		if (i <3 ){

@@ -4,6 +4,7 @@ import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.dto.RaceYearDto;
+import sk.insomnia.rowingRace.dto.TeamDto;
 import sk.insomnia.rowingRace.so.DisciplineCategory;
 import sk.insomnia.rowingRace.so.EnumEntity;
 import sk.insomnia.rowingRace.so.EnumEntitySO;
@@ -25,6 +26,21 @@ public final class MappingUtil {
         throw new AssertionError("MappingUtil was not meant to be instantiated");
     }
 
+    public static TeamDto toDto(Team team){
+        TeamDto teamDto = new TeamDto();
+        teamDto.setId(team.getId());
+        teamDto.setName(team.getName());
+        teamDto.setCategory(team.getTeamCategory().getAcronym());
+        return teamDto;
+    }
+
+    public static List<TeamDto> toDtoList(List<Team> teamList){
+        List<TeamDto> teamDtos = new ArrayList<>();
+        for(Team team:teamList){
+            teamDtos.add(toDto(team));
+        }
+        return teamDtos;
+    }
     public static Performance toSO(PerformanceDto performanceDto) {
         Performance performance = new Performance();
         performance.setFinalTime(performanceDto.getFinalTime());

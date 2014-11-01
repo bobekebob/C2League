@@ -32,6 +32,7 @@ import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
+import sk.insomnia.rowingRace.dto.TeamDto;
 import sk.insomnia.rowingRace.mapping.MappingUtil;
 import sk.insomnia.rowingRace.service.facade.ConnectivityException;
 import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
@@ -59,17 +60,17 @@ import java.util.ResourceBundle;
 public class RowingRaceDataDbService implements RowingRaceDbFacade {
 
     private final ResourceBundle bundle;
-    private static final LanguageMutationsDao languageMutationsDao = new LanguageMutationsDaoImpl();
-    private static final RowingRaceDao rowingRaceDao = new RowingRaceDaoImpl();
-    private static final SchoolDao schoolDao = new SchoolDaoImpl();
-    private static final PerformanceDao performanceDao = new PerformanceDaoImpl();
-    private static final CodeTableDao codeTableDao = new CodeTableDaoImpl();
-    private static final DisciplineCategoryDao disciplineCategoryDao = new DisciplineCategoryDaoImpl();
-    private static final RaceRoundDao raceRoundDao = new RaceRoundDaoImpl();
-    private static final RacerDao racerDao = new RacerDaoImpl();
-    private static final TeamDao teamDao = new TeamDaoImpl();
-    private static final IntervalDao intervalDao = new IntervalDaoImpl();
-    private static final DisciplineDao disciplineDao = new DisciplineDaoImpl();
+    private static final LanguageMutationsDao languageMutationsDao = LanguageMutationsDaoImpl.getInstance();
+    private static final RowingRaceDao rowingRaceDao = RowingRaceDaoImpl.getInstance();
+    private static final SchoolDao schoolDao = SchoolDaoImpl.getInstance();
+    private static final PerformanceDao performanceDao = PerformanceDaoImpl.getInstance();
+    private static final CodeTableDao codeTableDao = CodeTableDaoImpl.getInstance();
+    private static final DisciplineCategoryDao disciplineCategoryDao = DisciplineCategoryDaoImpl.getInstance();
+    private static final RaceRoundDao raceRoundDao = RaceRoundDaoImpl.getInstance();
+    private static final RacerDao racerDao = RacerDaoImpl.getInstance();
+    private static final TeamDao teamDao = TeamDaoImpl.getInstance();
+    private static final IntervalDao intervalDao = IntervalDaoImpl.getInstance();
+    private static final DisciplineDao disciplineDao = DisciplineDaoImpl.getInstance();
 
 
     private static final Logger LOG = LoggerFactory.getLogger(RowingRaceDataDbService.class);
@@ -88,6 +89,18 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
         DecimalFormat phoneDecimalFmt = new DecimalFormat("0000000000");
         retVal = phoneDecimalFmt.format(schoolDao.getSchoolCode());
         return retVal;
+    }
+
+    @Override
+    public List<School> getSchools() throws SQLException, ConnectivityException {
+        return this.schoolDao.getSchools();
+    }
+
+    @Override
+    public List<TeamDto> getTeamsBySchoolId(Long schoolId) throws SQLException, ConnectivityException {
+
+
+        return MappingUtil.toDtoList(teamDao.findBySchoolId(schoolId));
     }
 
 

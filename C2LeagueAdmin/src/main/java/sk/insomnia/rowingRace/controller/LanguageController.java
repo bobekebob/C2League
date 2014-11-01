@@ -8,6 +8,7 @@ import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
+import sk.insomnia.rowingRace.service.facade.RowingRaceFileFacade;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService;
 import sk.insomnia.rowingRace.so.EnumEntity;
 import sk.insomnia.rowingRace.so.EnumEntitySO;
@@ -29,7 +30,7 @@ public class LanguageController extends AbstractController {
     private Stage dialogStage;
     private EnumEntity language;
 
-    private final RowingRaceDataFileService fileService = new RowingRaceDataFileService();
+    private final RowingRaceFileFacade fileService = new RowingRaceDataFileService();
 
     @FXML
     private void initialize() {

@@ -17,27 +17,27 @@
             <fx:include fx:id="disciplines" source="disciplinesView.fxml" />
           </content>
         </Tab>
-        <Tab text="%label.tab.codeTables">
+        <Tab onSelectionChanged="#tabCodeTablesSelected" text="%label.tab.codeTables">
           <content>
             <fx:include fx:id="codeTables" source="codeTables.fxml" />
           </content>
         </Tab>
-        <Tab text="%label.managed.codeTables">
+        <Tab onSelectionChanged="#managedCodeTablesSelected" text="%label.managed.codeTables">
           <content>
               <fx:include fx:id="masterSlaveCodeTable" source="masterSlaveCodeTableView.fxml" />
           </content>
         </Tab>
-        <Tab closable="false" text="%label.tab.raceCalendar">
+        <Tab closable="false" onSelectionChanged="#tabRaceCalendarSelected" text="%label.tab.raceCalendar">
           <content>
             <fx:include fx:id="raceCalendar" source="raceCalendarView.fxml" />
           </content>
         </Tab>
-        <Tab text="%label.tab.performancesAdministration">
+        <Tab onSelectionChanged="#tabPerformanceSelected" text="%label.tab.performancesAdministration">
           <content>
             <fx:include fx:id="performancesAdministration" source="performancesAdministration.fxml" />
           </content>
         </Tab>
-            <Tab text="%label.tab.institution">
+            <Tab onSelectionChanged="#tabOrganizationsSelected" text="%label.tab.institution">
                 <content>
                     <fx:include fx:id="organizationAdministration" source="organizationView.fxml" />
                 </content>

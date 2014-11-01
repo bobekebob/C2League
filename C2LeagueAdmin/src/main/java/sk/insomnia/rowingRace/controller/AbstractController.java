@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
+import sk.insomnia.rowingRace.service.facade.RowingRaceFileFacade;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataDbService;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService;
 import java.util.Locale;
@@ -18,7 +19,7 @@ public abstract class AbstractController extends AbstractMessageDisplayer {
 
     public Locale locale;
     public RowingRaceDbFacade dbService;
-    public final RowingRaceDataFileService fileService = new RowingRaceDataFileService();
+    public final RowingRaceFileFacade fileService = new RowingRaceDataFileService();
 
 
     public abstract void initializeFormData();

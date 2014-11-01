@@ -1,6 +1,7 @@
 package sk.insomnia.rowingRace.ui.controller;
 
 import sk.insomnia.rowingRace.data.DataProcessor;
+import sk.insomnia.rowingRace.service.facade.RowingRaceFileFacade;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService;
 
 import java.util.Locale;
@@ -14,7 +15,7 @@ public abstract class AbstractController extends AbstractMessageDisplayer {
     public Locale locale;
     public ResourceBundle resourceBundle;
     public DataProcessor dataProcessor;
-    public final RowingRaceDataFileService fileService = new RowingRaceDataFileService();
+    public final RowingRaceFileFacade fileService = new RowingRaceDataFileService();
 
     public abstract void initLocale(Locale locale);
 

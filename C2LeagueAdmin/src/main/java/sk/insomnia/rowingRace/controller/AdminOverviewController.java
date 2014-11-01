@@ -78,10 +78,31 @@ public class AdminOverviewController extends AbstractController {
             controller.initLocale(locale);
             controller.initResourceBundle(resourceBundle);
             controller.setDbService(dbService);
-            controller.initializeFormData();
         }
+        disciplinesController.initializeFormData();
     }
 
+    @FXML
+    private void tabPerformanceSelected(){
+        performancesAdministrationController.initializeFormData();
+    }
+    @FXML
+    private void tabRaceCalendarSelected(){
+        raceCalendarController.initializeFormData();
+    }
+    @FXML
+    private void managedCodeTablesSelected(){
+        masterSlaveCodeTableController.initializeFormData();
+    }
+    @FXML
+    private void tabCodeTablesSelected(){
+        codeTablesController.initializeFormData();
+    }
+
+    @FXML
+    private void tabOrganizationsSelected(){
+        organizationAdministrationController.initializeFormData();
+    }
     private void initializeDataStore() {
         try {
             CommonDataStore.registerValuesForClass(RaceCategory.class, DtoUtils.listOfLanguageSpecificValues(dbService.getCodeTableValues(RowingRaceCodeTables.CT_RACE_CATEGORY), this.locale.getLanguage()));

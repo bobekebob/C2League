@@ -24,10 +24,10 @@
                            <children>
                               <TableView fx:id="tvSchools" prefHeight="200.0" prefWidth="200.0">
                                 <columns>
-                                    <TableColumn fx:id="tcSchoolName" minWidth="169.0" prefWidth="75.0" text="%label.school.name" />
-                                  <TableColumn fx:id="tcOrganizationKey" minWidth="169.0" prefWidth="75.0" text="%label.address" />
-                                  <TableColumn minWidth="169.0" prefWidth="75.0" text="%race.raceCategory" />
-                                    <TableColumn minWidth="169.0" prefWidth="75.0" text="%label.school.generatedKey" />
+                                    <TableColumn fx:id="tcOrganizationName" minWidth="169.0" prefWidth="75.0" text="%label.school.name" />
+                                  <TableColumn fx:id="tcOrganizationAddress" minWidth="169.0" prefWidth="75.0" text="%label.address" />
+                                  <TableColumn fx:id="tcRaceCategory" minWidth="169.0" prefWidth="75.0" text="%race.raceCategory" />
+                                    <TableColumn fx:id="tcOrganizationKey" minWidth="169.0" prefWidth="75.0" text="%label.school.generatedKey" />
                                 </columns>
                               </TableView>
                               <GridPane GridPane.rowIndex="1">
@@ -112,7 +112,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="%label.tab.teams">
+          <Tab onSelectionChanged="#tbTeamsSelected" text="%label.tab.teams">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

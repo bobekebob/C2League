@@ -29,6 +29,7 @@ import sk.insomnia.rowingRace.dao.jdbc.TeamDaoImpl;
 import sk.insomnia.rowingRace.dataStore.CommonDataStore;
 import sk.insomnia.rowingRace.dataStore.NoDataForKeyException;
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
+import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
@@ -52,7 +53,6 @@ import sk.insomnia.rowingRace.so.Team;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -156,29 +156,27 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     }
 
 
-    @Deprecated
-    public List<EnumEntityDto> getCodeTable(RowingRaceCodeTables codeTable) throws SQLException,
-            ConnectivityException {
-        List<EnumEntityDto> codeTables = new ArrayList<EnumEntityDto>();
-
-
-        List<EnumEntity> tcs = codeTableDao.getAll(codeTable);
-        Iterator<EnumEntity> it = tcs.iterator();
-        while (it.hasNext()) {
-            SimpleEnumEntityDto ctd = new SimpleEnumEntityDto();
-            EnumEntity ct = it.next();
-            ctd.setId(ct.getId());
-            ctd.setAcronym(ct.getAcronym());
-            ctd.setValue(bundle.getString(ct.getAcronym()));
-            codeTables.add(ctd);
+    public List<EnumEntityDto> getCodeTable(RowingRaceCodeTables codeTable, Locale locale) throws SQLException,
+            ConnectivityException, DtoUtils.DtoUtilException {
+        List<EnumEntityDto> codeTables;
+        try {
+            codeTables = CommonDataStore.getValuesForCodeTable(codeTable);
+        } catch (NoDataForKeyException e) {
+            LOG.info(String.format("No values for code table found for %s in CommonDatastore, going to read from DB.", codeTable));
+            List<EnumEntity> tcs = codeTableDao.getAll(codeTable);
+            codeTables = DtoUtils.listOfLanguageSpecificValues(tcs, locale.getLanguage());
+            CommonDataStore.registerValuesForCodeTable(codeTable, codeTables);
         }
         return codeTables;
     }
 
+/*
+    @Deprecated
     public List<EnumEntity> getCodeTableValues(RowingRaceCodeTables codeTable) throws SQLException,
             ConnectivityException {
         return codeTableDao.getAll(codeTable);
     }
+*/
 
     @Override
     public void deleteCodeTableValue(EnumEntity enumEntity, RowingRaceCodeTables codeTable) throws SQLException, ConnectivityException {

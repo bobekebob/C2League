@@ -1,5 +1,6 @@
 package sk.insomnia.rowingRace.dataStore;
 
+import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.so.EnumEntity;
 
@@ -14,6 +15,7 @@ public final class CommonDataStore {
 
     private static final Map<Class, Object> data = new HashMap<>();
     private static final Map<Class<? extends EnumEntity>, List<? extends EnumEntityDto>> enumEntities = new HashMap();
+    private static final Map<RowingRaceCodeTables, List<EnumEntityDto>> codeTableValues = new HashMap();
 
 
     public static Object getInstanceOfClass(Class clazz) throws NoDataForKeyException {
@@ -36,5 +38,14 @@ public final class CommonDataStore {
 
     public static void registerValuesForClass(Class<? extends EnumEntity> clazz, List<? extends EnumEntityDto> values) {
         enumEntities.put(clazz, values);
+    }
+    public static void registerValuesForCodeTable(RowingRaceCodeTables codeTable, List<EnumEntityDto> values) {
+        codeTableValues.put(codeTable, values);
+    }
+    public static List<EnumEntityDto> getValuesForCodeTable(RowingRaceCodeTables codeTable) throws NoDataForKeyException {
+        if (codeTableValues.containsKey(codeTable)) {
+            return codeTableValues.get(codeTable);
+        }
+        throw new NoDataForKeyException(String.format("Data store doesn't contain values for code table %s", codeTable));
     }
 }

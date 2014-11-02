@@ -1,6 +1,7 @@
 package sk.insomnia.rowingRace.listener;
 
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
+import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.so.EnumEntity;
 import sk.insomnia.rowingRace.so.EnumEntitySO;
 
@@ -26,7 +27,7 @@ public class DataChangeObserver {
         }
     }
 
-    public static void notifyCTSelected(List<EnumEntity> values, RowingRaceCodeTables codeTable) {
+    public static void notifyCTSelected(List<EnumEntityDto> values, RowingRaceCodeTables codeTable) {
         if (CODE_TABLE_LISTENER_LIST.containsKey(codeTable)) {
             for (CodeTableListener listener : CODE_TABLE_LISTENER_LIST.get(codeTable)) {
                 listener.onCodeTableSelected(values, codeTable);

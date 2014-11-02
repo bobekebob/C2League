@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
+import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
 import sk.insomnia.rowingRace.listener.DataChangeObserver;
 import sk.insomnia.rowingRace.service.facade.ConnectivityException;
 import sk.insomnia.rowingRace.so.EnumEntity;
@@ -78,10 +79,10 @@ public class CodeTablesController extends AbstractController {
     @FXML
     private ComboBox<RowingRaceCodeTables> cbCodeTable;
 
-    private ObservableList<EnumEntity> codeTableValues = FXCollections.observableArrayList();
+    private ObservableList<EnumEntityDto> codeTableValues = FXCollections.observableArrayList();
     private ObservableList<LanguageMutation> languageMutations = FXCollections.observableArrayList();
 
-    private EnumEntitySO actualEnumEntitySO;
+    private EnumEntityDto actualEnumEntityDto;
     private LanguageMutation mutationInProcess;
 
     private RowingRaceCodeTables selectedCodeTable;
@@ -127,11 +128,11 @@ public class CodeTablesController extends AbstractController {
     private void initializeRaceCategoriesTable() {
         tbCodeTable.setItems(codeTableValues);
         tbCodeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tbCodeTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<EnumEntitySO>() {
+        tbCodeTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<EnumEntityDto>() {
 
             @Override
-            public void changed(ObservableValue<? extends EnumEntitySO> observable,
-                                EnumEntitySO oldValue, EnumEntitySO newValue) {
+            public void changed(ObservableValue<? extends EnumEntityDto> observable,
+                                EnumEntityDto oldValue, EnumEntityDto newValue) {
                 showRaceCategoryDetails(newValue);
             }
         });
@@ -157,17 +158,17 @@ public class CodeTablesController extends AbstractController {
         });
     }
 
-    private void showRaceCategoryDetails(EnumEntitySO enumEntitySO) {
-        if (enumEntitySO == null) {
+    private void showRaceCategoryDetails(EnumEntityDto enumEntityDto) {
+        if (enumEntityDto == null) {
             return;
         }
-        actualEnumEntitySO = enumEntitySO;
+        actualEnumEntityDto = enumEntityDto;
         resetForm();
         this.languageMutations.clear();
-        if (actualEnumEntitySO.getLanguageMutations() != null && actualEnumEntitySO.getLanguageMutations().size() > 0) {
-            this.languageMutations.addAll(actualEnumEntitySO.getLanguageMutations());
+        if (actualEnumEntityDto.getLanguageMutations() != null && actualEnumEntityDto.getLanguageMutations().size() > 0) {
+            this.languageMutations.addAll(actualEnumEntityDto.getLanguageMutations());
         }
-        tfAcronym.setText(actualEnumEntitySO.getAcronym());
+        tfAcronym.setText(actualEnumEntityDto.getAcronym());
     }
 
     private void setMutationForm(LanguageMutation mutation) {
@@ -193,11 +194,11 @@ public class CodeTablesController extends AbstractController {
     private void onDeleteCategory() {
         if (!recordInProgressEmpty()) {
             try {
-                dbService.deleteCodeTableValue(actualEnumEntitySO, selectedCodeTable);
-                tbCodeTable.getItems().remove(actualEnumEntitySO);
-                actualEnumEntitySO = null;
+                dbService.deleteCodeTableValue(actualEnumEntityDto, selectedCodeTable);
+                tbCodeTable.getItems().remove(actualEnumEntityDto);
+                actualEnumEntityDto = null;
             } catch (ConnectivityException | SQLException e) {
-                logger.error(String.format("Error occured while deleting value %s", actualEnumEntitySO.getAcronym()), e);
+                logger.error(String.format("Error occured while deleting value %s", actualEnumEntityDto.getAcronym()), e);
                 displayErrorCTSAve();
             }
             resetForm();
@@ -212,7 +213,7 @@ public class CodeTablesController extends AbstractController {
     }
 
     private boolean recordInProgressEmpty() {
-        if (this.actualEnumEntitySO == null) {
+        if (this.actualEnumEntityDto == null) {
             errorMessageBase(selectedCodeTable, ERR_NO_RACE_CATEGORY_SELECTED);
             return true;
         }
@@ -221,18 +222,18 @@ public class CodeTablesController extends AbstractController {
 
     @FXML
     private void onAddCategory() {
-        if (actualEnumEntitySO == null) {
-            actualEnumEntitySO = new EnumEntitySO();
+        if (actualEnumEntityDto == null) {
+            actualEnumEntityDto = new SimpleEnumEntityDto();
         }
         if (tfAcronym.getText() != null && !tfAcronym.getText().isEmpty()) {
-            actualEnumEntitySO.setAcronym(tfAcronym.getText());
+            actualEnumEntityDto.setAcronym(tfAcronym.getText());
         } else {
             errorMessageBase(selectedCodeTable, ERR_ACRONYM_EMTPY);
         }
-        if (actualEnumEntitySO.getId() == null) {
-            codeTableValues.add(actualEnumEntitySO);
+        if (actualEnumEntityDto.getId() == null) {
+            codeTableValues.add(actualEnumEntityDto);
         }
-        saveRaceCategory(actualEnumEntitySO);
+        saveRaceCategory(actualEnumEntityDto);
         resetForm();
         DataChangeObserver.notifyCTSelected(codeTableValues, selectedCodeTable);
         refreshTable(tbCodeTable);
@@ -289,7 +290,7 @@ public class CodeTablesController extends AbstractController {
         cbLanguage.getSelectionModel().selectFirst();
     }
 
-    private void saveRaceCategory(EnumEntitySO raceCategory) {
+    private void saveRaceCategory(EnumEntityDto raceCategory) {
         try {
             dbService.saveCodeTableValue(raceCategory, selectedCodeTable);
         } catch (ConnectivityException | SQLException e) {
@@ -318,7 +319,7 @@ public class CodeTablesController extends AbstractController {
     @FXML
     private void onNewRaceCategory() {
         resetForm();
-        actualEnumEntitySO = new EnumEntitySO();
+        actualEnumEntityDto = new SimpleEnumEntityDto();
     }
 
     @FXML
@@ -337,8 +338,8 @@ public class CodeTablesController extends AbstractController {
     private void initializeLanguagesData() {
         this.cbLanguage.getItems().clear();
         try {
-            List<EnumEntity> languages = dbService.getCodeTableValues(RowingRaceCodeTables.CT_LANGUAGES);
-            this.cbLanguage.getItems().addAll(DtoUtils.listOfLanguageSpecificValues(languages, this.locale.getLanguage()));
+            List<EnumEntityDto> languages = dbService.getCodeTable(RowingRaceCodeTables.CT_LANGUAGES, this.locale);
+            this.cbLanguage.getItems().addAll(languages);
         } catch (DtoUtils.DtoUtilException | ConnectivityException | SQLException e) {
             e.printStackTrace();
             displayErrorCTSAve();
@@ -351,13 +352,16 @@ public class CodeTablesController extends AbstractController {
 
 
     private void intializeCodeTableData() {
+        this.languageMutations.clear();
         this.codeTableValues.clear();
+        if (selectedCodeTable == null){
+            return;
+        }
         try {
-            List<EnumEntity> ctValues = dbService.getCodeTableValues(selectedCodeTable);
+            List<EnumEntityDto> ctValues = dbService.getCodeTable(selectedCodeTable, this.locale);
             this.codeTableValues.addAll(ctValues);
-            this.languageMutations.clear();
             DataChangeObserver.notifyCTSelected(ctValues, selectedCodeTable);
-        } catch (ConnectivityException | SQLException e) {
+        } catch (DtoUtils.DtoUtilException | ConnectivityException | SQLException e) {
             logger.error("Error loading code table values", e);
             displayErrorCTLoad();
         }

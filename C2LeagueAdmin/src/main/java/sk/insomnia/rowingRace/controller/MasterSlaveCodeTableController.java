@@ -20,6 +20,7 @@ import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
 import sk.insomnia.rowingRace.markers.RaceCategory;
 import sk.insomnia.rowingRace.markers.TeamCategory;
+import sk.insomnia.rowingRace.service.facade.ConnectivityException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -123,15 +124,15 @@ public class MasterSlaveCodeTableController extends AbstractController {
     @Override
     public void initializeFormData() {
         try {
-            masterCodeTableValues.addAll(CommonDataStore.getValuesForClass(RaceCategory.class));
-        } catch (NoDataForKeyException e) {
+            masterCodeTableValues.addAll(dbService.getCodeTable(cbMasterCodeTable.getValue(), this.locale));
+        } catch (DtoUtils.DtoUtilException| SQLException | ConnectivityException e) {
             LOG.debug("Can't read race category data from data store.");
             errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD);
         }
 
         try {
-            slaveCodeTableValues.addAll(CommonDataStore.getValuesForClass(TeamCategory.class));
-        } catch (NoDataForKeyException e) {
+            slaveCodeTableValues.addAll(dbService.getCodeTable(cbSlaveCodeTable.getValue(), this.locale));
+        } catch (DtoUtils.DtoUtilException| SQLException | ConnectivityException e) {
             LOG.debug("Can't read race category data from data store.");
             errorMessageBase(RowingRaceCodeTables.CT_TEAM_CATEGORIES, ERR_CODE_TABLE_DATA_LOAD);
         }

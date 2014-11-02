@@ -31,6 +31,7 @@ import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
 import sk.insomnia.rowingRace.dataStore.CommonDataStore;
 import sk.insomnia.rowingRace.dataStore.NoDataForKeyException;
 import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
+import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.RaceYearDto;
 import sk.insomnia.rowingRace.mapping.MappingUtil;
@@ -157,8 +158,8 @@ public class RaceCalendarController extends AbstractController {
         }
         refreshRaceRoundsTable();
         try {
-            this.raceCategoriesList = (List<EnumEntityDto>) CommonDataStore.getValuesForClass(RaceCategory.class);
-        } catch (NoDataForKeyException e) {
+            this.raceCategoriesList = dbService.getCodeTable(RowingRaceCodeTables.CT_RACE_CATEGORY, this.locale);
+        } catch (DtoUtils.DtoUtilException | ConnectivityException | SQLException e) {
             logger.error("No data found for class {}", RaceCategory.class);
         }
     }

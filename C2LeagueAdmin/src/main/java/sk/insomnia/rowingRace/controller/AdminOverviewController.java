@@ -105,14 +105,14 @@ public class AdminOverviewController extends AbstractController {
     }
     private void initializeDataStore() {
         try {
-            CommonDataStore.registerValuesForClass(RaceCategory.class, DtoUtils.listOfLanguageSpecificValues(dbService.getCodeTableValues(RowingRaceCodeTables.CT_RACE_CATEGORY), this.locale.getLanguage()));
+            dbService.getCodeTable(RowingRaceCodeTables.CT_RACE_CATEGORY, this.locale);
         } catch (DtoUtils.DtoUtilException | ConnectivityException | SQLException e) {
             LOG.error(String.format("Can't register data for %s because of ", RowingRaceCodeTables.CT_RACE_CATEGORY, e));
             errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD);
         }
 
         try {
-            CommonDataStore.registerValuesForClass(TeamCategory.class, DtoUtils.listOfLanguageSpecificValues(dbService.getCodeTableValues(RowingRaceCodeTables.CT_TEAM_CATEGORIES), this.locale.getLanguage()));
+            dbService.getCodeTable(RowingRaceCodeTables.CT_TEAM_CATEGORIES,this.locale);
         } catch (DtoUtils.DtoUtilException | ConnectivityException | SQLException e) {
             LOG.error(String.format("Can't register data for %s because of ", RowingRaceCodeTables.CT_TEAM_CATEGORIES, e));
             errorMessageBase(RowingRaceCodeTables.CT_RACE_CATEGORY, ERR_CODE_TABLE_DATA_LOAD);

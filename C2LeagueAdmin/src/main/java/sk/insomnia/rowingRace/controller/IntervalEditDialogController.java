@@ -116,7 +116,7 @@ public class IntervalEditDialogController {
         try {
             cbDimension.getItems().clear();
             if (dbService.isConnectivity()) {
-                List<EnumEntityDto> iDims = this.dbService.getCodeTable(RowingRaceCodeTables.CT_INTERVAL_DIMENSION);
+                List<EnumEntityDto> iDims = this.dbService.getCodeTable(RowingRaceCodeTables.CT_INTERVAL_DIMENSION, this.locale);
                 this.intervalDimensionsData.clear();
                 this.intervalDimensionsData.addAll(iDims);
                 cbDimension.setItems(intervalDimensionsData);

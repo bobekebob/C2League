@@ -5,9 +5,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.stage.Stage;
 import sk.insomnia.rowingRace.constants.RowingRaceCodeTables;
-import sk.insomnia.rowingRace.dto.DtoUtils;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
-import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
 import sk.insomnia.rowingRace.service.facade.RowingRaceFileFacade;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService;
 import sk.insomnia.rowingRace.so.EnumEntity;
@@ -53,7 +51,7 @@ public class LanguageController extends AbstractController {
         try {
             this.cbLanguage.getItems().clear();
             if (this.dbService.isConnectivity()) {
-                languages = DtoUtils.listOfLanguageSpecificValues(this.dbService.getCodeTableValues(RowingRaceCodeTables.CT_LANGUAGES), this.locale.getLanguage());
+                languages = this.dbService.getCodeTable(RowingRaceCodeTables.CT_LANGUAGES, this.locale);
                 if (languages != null) {
                     this.fileService.saveOrUpdate(languages, RowingRaceCodeTables.CT_LANGUAGES);
                 }

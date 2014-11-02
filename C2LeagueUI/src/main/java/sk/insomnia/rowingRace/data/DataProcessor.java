@@ -14,7 +14,6 @@ import sk.insomnia.rowingRace.listeners.SchoolListener;
 import sk.insomnia.rowingRace.service.facade.ConnectivityException;
 import sk.insomnia.rowingRace.service.facade.RowingRaceDbFacade;
 import sk.insomnia.rowingRace.service.facade.RowingRaceFileFacade;
-import sk.insomnia.rowingRace.service.impl.RowingRaceDataDbService;
 import sk.insomnia.rowingRace.service.impl.RowingRaceDataFileService;
 import sk.insomnia.rowingRace.so.EnumEntity;
 import sk.insomnia.rowingRace.so.Performance;
@@ -139,7 +138,7 @@ public final class DataProcessor implements SchoolListener {
 
     public List<EnumEntityDto> getCodeTable(RowingRaceCodeTables rowingRaceCodeTables) throws RowingRaceException, DtoUtils.DtoUtilException {
         try {
-            return DtoUtils.listOfLanguageSpecificValues(dbService.getCodeTableValues(rowingRaceCodeTables), this.locale.getLanguage());
+            return dbService.getCodeTable(rowingRaceCodeTables, this.locale);
         } catch (Exception e) {
             throw new RowingRaceException(String.format("Can't read code table data. Cause : %s", e.getMessage()), ExceptionType.UNKNOWN);
         }

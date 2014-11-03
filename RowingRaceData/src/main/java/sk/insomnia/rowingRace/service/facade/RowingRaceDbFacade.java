@@ -39,6 +39,7 @@ public interface RowingRaceDbFacade {
     public void addTeamToSchool(Team team, Long schoolId) throws SQLException, ConnectivityException;
 
     public void saveTeam(Team team) throws SQLException, ConnectivityException;
+    public void saveTeam(TeamDto team, Long schoolId) throws SQLException, ConnectivityException;
 
     public void addRacerToTeam(Racer racer, Long teamId) throws SQLException, ConnectivityException;
 
@@ -52,6 +53,7 @@ public interface RowingRaceDbFacade {
     public void deleteRacer(Racer racer) throws SQLException, ConnectivityException;
 
     public void deleteTeam(Team team) throws SQLException, ConnectivityException;
+    public void deleteTeam(Long teamId) throws SQLException, ConnectivityException;
 
     public void deleteSchool(School school) throws SQLException, ConnectivityException;
 
@@ -103,4 +105,5 @@ public interface RowingRaceDbFacade {
     public void saveSlaveValues(Long masterValueId, RowingRaceCodeTables masterCodeTable, List<EnumEntityDto> slaveValues, RowingRaceCodeTables slaveCodeTable) throws SQLException;
 
     public void deletePerformance(PerformanceDto selectedItem) throws SQLException, ConnectivityException;
+
 }

@@ -254,6 +254,11 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
         teamDao.delete(team);
     }
 
+    @Override
+    public void deleteTeam(Long teamId) throws SQLException, ConnectivityException {
+        teamDao.deleteTeam(teamId);
+    }
+
     public void deleteSchool(School school) throws SQLException,
             ConnectivityException {
         schoolDao.delete(school);
@@ -275,6 +280,11 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
 
     public void saveTeam(Team team) throws SQLException, ConnectivityException {
         teamDao.saveOrUpdate(team, null);
+    }
+
+    @Override
+    public void saveTeam(TeamDto team, Long schoolId) throws SQLException, ConnectivityException {
+        teamDao.saveOrUpdate(MappingUtil.toSO(team), schoolId);
     }
 
     public void addIntervalToDiscipline(Interval interval, Long disciplineId)
@@ -303,5 +313,4 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
             ConnectivityException {
         racerDao.saveOrUpdate(racer, null);
     }
-
 }

@@ -49,6 +49,17 @@ public class TeamDaoImpl {
             }
         }
 
+        @Override
+        public void deleteTeam(Long teamId) throws SQLException {
+            Connection connection = DbConnection.getConnection();
+            if (teamId != null) {
+                PreparedStatement ps = connection.prepareStatement("UPDATE RR_TEAM SET DELETED=1 WHERE TEAM_ID=?");
+                ps.setLong(1, teamId);
+                ps.executeUpdate();
+                ps.close();
+            }
+        }
+
         public void saveOrUpdate(Team team, Long schoolID) throws SQLException {
             Connection connection = DbConnection.getConnection();
             if (team.getId() != null) {

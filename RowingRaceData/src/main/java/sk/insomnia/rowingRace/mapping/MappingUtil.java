@@ -4,6 +4,7 @@ import sk.insomnia.rowingRace.dto.DisciplineCategoryDto;
 import sk.insomnia.rowingRace.dto.EnumEntityDto;
 import sk.insomnia.rowingRace.dto.PerformanceDto;
 import sk.insomnia.rowingRace.dto.RaceYearDto;
+import sk.insomnia.rowingRace.dto.SimpleEnumEntityDto;
 import sk.insomnia.rowingRace.dto.TeamDto;
 import sk.insomnia.rowingRace.so.DisciplineCategory;
 import sk.insomnia.rowingRace.so.EnumEntity;
@@ -30,8 +31,19 @@ public final class MappingUtil {
         TeamDto teamDto = new TeamDto();
         teamDto.setId(team.getId());
         teamDto.setName(team.getName());
-        teamDto.setCategory(team.getTeamCategory().getAcronym());
+        teamDto.setCategory(new SimpleEnumEntityDto(team.getTeamCategory()));
+        teamDto.setNumberOfAlternates(team.getNumberOfAlternates());
+        teamDto.setMaxRacers(team.getMaxRacers());
         return teamDto;
+    }
+    public static Team toSO(TeamDto teamDto){
+        Team team = new Team();
+        team.setId(teamDto.getId());
+        team.setName(teamDto.getName());
+        team.setTeamCategory(teamDto.getCategory());
+        team.setNumberOfAlternates(teamDto.getNumberOfAlternates());
+        team.setMaxRacers(teamDto.getMaxRacers());
+        return team;
     }
 
     public static List<TeamDto> toDtoList(List<Team> teamList){

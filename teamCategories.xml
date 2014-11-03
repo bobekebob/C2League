@@ -2,7 +2,7 @@
   <codeTable>
     <id>1</id>
     <acronym>TEAM_CATEGORY_BOYS_OLDER</acronym>
-    <value>Starší chlapci.</value>
+    <value>Chlapci (3. - 4. ročník)</value>
     <languageMutations>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>40</id>
@@ -36,7 +36,7 @@
       </sk.insomnia.rowingRace.so.LanguageMutation>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>44</id>
-        <value>Starší chlapci.</value>
+        <value>Chlapci (3. - 4. ročník)</value>
         <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
           <id>5</id>
           <acronym>SK</acronym>
@@ -79,7 +79,7 @@
   <codeTable>
     <id>2</id>
     <acronym>TEAM_CATEGORY_BOYS_YOUNGER</acronym>
-    <value>Mladší chlapci.</value>
+    <value>Chlapci (1. - 2. ročník)</value>
     <languageMutations>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>47</id>
@@ -113,7 +113,7 @@
       </sk.insomnia.rowingRace.so.LanguageMutation>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>50</id>
-        <value>Mladší chlapci.</value>
+        <value>Chlapci (1. - 2. ročník)</value>
         <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
           <id>5</id>
           <acronym>SK</acronym>
@@ -156,7 +156,7 @@
   <codeTable>
     <id>3</id>
     <acronym>TEAM_CATEGORY_EMPLOYEES</acronym>
-    <value>Zamestnanci.</value>
+    <value>Pedagógovia a priatelia školy</value>
     <languageMutations>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>55</id>
@@ -180,7 +180,7 @@
       </sk.insomnia.rowingRace.so.LanguageMutation>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>57</id>
-        <value>Zaměstnanci.</value>
+        <value>Pedagogové a přátelé školy</value>
         <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
           <id>2</id>
           <acronym>CS</acronym>
@@ -210,7 +210,7 @@
       </sk.insomnia.rowingRace.so.LanguageMutation>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>60</id>
-        <value>Employees.</value>
+        <value>Teachers and school friends</value>
         <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
           <id>3</id>
           <acronym>EN</acronym>
@@ -220,7 +220,7 @@
       </sk.insomnia.rowingRace.so.LanguageMutation>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>61</id>
-        <value>Zamestnanci.</value>
+        <value>Pedagógovia a priatelia školy</value>
         <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
           <id>5</id>
           <acronym>SK</acronym>
@@ -233,7 +233,7 @@
   <codeTable>
     <id>4</id>
     <acronym>TEAM_CATEGORY_GIRLS_OLDER</acronym>
-    <value>Staršie dievčatá.</value>
+    <value>Dievčatá (3. - 4. ročník)</value>
     <languageMutations>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>62</id>
@@ -267,7 +267,7 @@
       </sk.insomnia.rowingRace.so.LanguageMutation>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>65</id>
-        <value>Staršie dievčatá.</value>
+        <value>Dievčatá (3. - 4. ročník)</value>
         <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
           <id>5</id>
           <acronym>SK</acronym>
@@ -300,7 +300,7 @@
   <codeTable>
     <id>5</id>
     <acronym>TEAM_CATEGORY_GIRLS_YOUNGER</acronym>
-    <value>Mladšie dievčatá.</value>
+    <value>Dievčatá (1. - 2. ročník)</value>
     <languageMutations>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>68</id>
@@ -334,7 +334,7 @@
       </sk.insomnia.rowingRace.so.LanguageMutation>
       <sk.insomnia.rowingRace.so.LanguageMutation>
         <id>71</id>
-        <value>Mladšie dievčatá.</value>
+        <value>Dievčatá (1. - 2. ročník)</value>
         <language class="sk.insomnia.rowingRace.so.EnumEntitySO">
           <id>5</id>
           <acronym>SK</acronym>

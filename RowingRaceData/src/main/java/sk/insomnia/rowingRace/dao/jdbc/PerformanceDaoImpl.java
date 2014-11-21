@@ -34,9 +34,12 @@ public class PerformanceDaoImpl {
     private static class DaoImpl implements PerformanceDao {
 
         private static final Logger logger = Logger.getLogger(PerformanceDaoImpl.class.toString());
-
         @Override
         public void saveOrUpdate(Performance performance) throws SQLException, ConnectivityException {
+            saveOrUpdate(performance, false);
+        }
+        @Override
+        public void saveOrUpdate(Performance performance, boolean force) throws SQLException, ConnectivityException {
             Connection connection = DbConnection.getConnection();
             // check whether if team has raced this round and if it has better time
             String dimension = "DIM_DISTANCE";
@@ -58,7 +61,7 @@ public class PerformanceDaoImpl {
                 if (value.equals("FINAL_TIME")) {
                     //when interval dimension is time, final distance in designed time is important
                     double dbValue = rs.getDouble("FINAL_DISTANCE");
-                    if (dbValue < performance.getFinalDistance()) {
+                    if (force || (dbValue < performance.getFinalDistance())) {
                         performance.setId(rs.getLong("PERFORMANCE_ID"));
                     } else {
                         //do nothing
@@ -67,7 +70,7 @@ public class PerformanceDaoImpl {
                 } else {
                     //when interval dimension is distance, final time in designed distance is important
                     double dbValue = rs.getDouble("FINAL_TIME");
-                    if (dbValue > performance.getFinalTime()) {
+                    if (force || (dbValue <=0 || (dbValue > performance.getFinalTime()))) {
                         performance.setId(rs.getLong("PERFORMANCE_ID"));
                     } else {
                         return;

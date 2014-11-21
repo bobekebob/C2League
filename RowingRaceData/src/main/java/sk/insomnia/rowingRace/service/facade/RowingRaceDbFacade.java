@@ -82,6 +82,7 @@ public interface RowingRaceDbFacade {
     public boolean isConnectivity();
 
     public void saveOrUpdate(Performance performance) throws SQLException, ConnectivityException;
+    public void saveOrUpdate(Performance performance, boolean force) throws SQLException, ConnectivityException;
 
     public List<PerformanceDto> getAllPerformancesForRaceYearAndRound(Long raceYearId, Long raceRoundId) throws SQLException;
 

@@ -162,7 +162,7 @@
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
@@ -171,7 +171,7 @@
                                                 <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                              </GridPane.margin>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="485.0" text="%label.team.category" GridPane.rowIndex="1">
+                                          <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="485.0" text="%label.team.category" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                              </GridPane.margin>
@@ -180,16 +180,16 @@
                                              <GridPane.margin>
                                                 <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                              </GridPane.margin></TextField>
-                                          <ComboBox fx:id="cbDisciplineCategory" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <ComboBox fx:id="cbDisciplineCategory" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                              </GridPane.margin></ComboBox>
-                                          <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="491.0" text="%label.raceCalendar.year" GridPane.rowIndex="2">
+                                          <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="491.0" text="%label.raceCalendar.year" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                              </GridPane.margin>
                                           </Label>
-                                          <ComboBox fx:id="cbRaceYear" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <ComboBox fx:id="cbRaceYear" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                              </GridPane.margin>

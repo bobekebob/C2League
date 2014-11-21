@@ -52,7 +52,6 @@ import sk.insomnia.rowingRace.so.Team;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -145,9 +144,14 @@ public class RowingRaceDataDbService implements RowingRaceDbFacade {
     }
 
 
-    public void saveOrUpdate(Performance performance) throws SQLException,
+    public void saveOrUpdate(Performance performance, boolean force) throws SQLException,
             ConnectivityException {
         performanceDao.saveOrUpdate(performance);
+    }
+
+    public void saveOrUpdate(Performance performance) throws SQLException,
+            ConnectivityException {
+        saveOrUpdate(performance, false);
     }
 
     @Override
